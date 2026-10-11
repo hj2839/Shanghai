@@ -427,6 +427,7 @@
   .map-embed-wrap:last-child{margin-bottom:0;}
   .map-embed-wrap h3{font-size:0.82em;margin:0 0 6px;color:var(--sub);font-weight:600;}
   .gmap-frame{width:100%;height:280px;border:1px solid var(--line);border-radius:12px;display:block;}
+  .mymap-frame{height:380px;}
   .amap-box{width:100%;height:280px;border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative;background:var(--chip-bg);}
   .amap-box .amap-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--sub);font-size:0.82em;line-height:1.5;}
   .map-frame-outer{position:relative;}
@@ -625,118 +626,16 @@
       </div>
     </div>
 
-    <div class="banner">
-      🗺️ 아래는 메뉴 정비 전 '지도' 탭에 있던 전체 위치 안내도를 그대로 옮겨온 것입니다. 일자별 동선 지도가 준비되면 구성이 달라질 수 있습니다.
-    </div>
-
     <div class="card">
       <h2>🗺️ 주요 장소 위치 지도</h2>
-      <p class="app-desc">호텔을 기준으로 각 목적지가 실제로 어느 방향·구역에 있는지 한눈에 확인 · 원을 탭하면 고덕지도로 이동</p>
-      <div class="map-legend">
-        <span><i style="background:var(--home)"></i>호텔(기준)</span>
-        <span><i style="background:var(--day1)"></i>Day1·5 이동일</span>
-        <span><i style="background:var(--day2)"></i>Day2</span>
-        <span><i style="background:var(--day3)"></i>Day3 테니스</span>
-        <span><i style="background:var(--day4)"></i>Day4</span>
-        <span><i style="background:var(--day5)"></i>Day5</span>
+      <p class="app-desc">구글 내 지도(My Maps)로 정리한 여행 장소 지도입니다. 지도를 탭하면 크게 볼 수 있습니다. 중국 현지에서는 한국 로밍·eSIM에서만 열릴 수 있으니, 지도가 안 보이면 아래 목적지 바로가기의 고덕지도를 이용하세요.</p>
+      <div class="map-frame-outer">
+        <iframe class="gmap-frame mymap-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="상하이여행 지도" src="https://www.google.com/maps/d/embed?mid=1C0XcK5UYJgXHVQ9zqs4P5TQEE4dp6wc"></iframe>
+        <button type="button" class="map-click-catch" data-modal-title="상하이여행 · 구글 내 지도"><span class="zoom-hint">🔍 확대</span></button>
       </div>
-      <div class="mapwrap">
-        <svg viewBox="0 0 790 820" role="img" aria-label="상하이 여행 주요 장소 위치 지도">
-          <rect x="0" y="0" width="790" height="820" fill="var(--land)"/>
-          <path d="M 685,0 Q 655,150 665,450 Q 675,650 615,820" fill="none" stroke="var(--river)" stroke-width="60" stroke-linecap="round" opacity="0.75"/>
-          <text x="712" y="285" font-size="12" font-weight="600" fill="var(--sub)" transform="rotate(80 712 285)">황푸강</text>
-          <g opacity="0.6" stroke="var(--sub)" stroke-width="1.6">
-            <line x1="750" y1="55" x2="750" y2="30"/>
-            <path d="M743,38 L750,28 L757,38" fill="none"/>
-          </g>
-          <text x="750" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="var(--sub)">N</text>
-
-          <a href="https://uri.amap.com/search?keyword=朱家角古镇&city=上海" target="_blank" rel="noopener">
-            <circle cx="80" cy="600" r="26" fill="transparent"/>
-            <rect x="47.5" y="566" width="65" height="22" rx="6" fill="var(--card)" stroke="var(--day2)" stroke-width="1"/>
-            <text x="80" y="581.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">주가각</text>
-            <circle cx="80" cy="600" r="10" fill="var(--day2)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=上海虹桥国际机场&city=上海" target="_blank" rel="noopener">
-            <circle cx="110" cy="430" r="26" fill="transparent"/>
-            <rect x="65" y="396" width="90" height="22" rx="6" fill="var(--card)" stroke="var(--day1)" stroke-width="1"/>
-            <text x="110" y="411.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">홍차오공항</text>
-            <circle cx="110" cy="430" r="10" fill="var(--day1)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=上海虹桥万丽酒店&city=上海" target="_blank" rel="noopener">
-            <circle cx="230" cy="440" r="30" fill="transparent"/>
-            <rect x="193" y="398" width="74" height="24" rx="7" fill="var(--card)" stroke="var(--home)" stroke-width="1.4"/>
-            <text x="230" y="414.5" text-anchor="middle" font-size="14" font-weight="800" fill="var(--home)">호텔</text>
-            <circle cx="230" cy="440" r="13" fill="var(--home)" stroke="var(--card)" stroke-width="3"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=旗忠网球中心&city=上海" target="_blank" rel="noopener">
-            <circle cx="260" cy="770" r="26" fill="transparent"/>
-            <rect x="208" y="736" width="104" height="22" rx="6" fill="var(--card)" stroke="var(--day3)" stroke-width="1"/>
-            <text x="260" y="751.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">테니스경기장</text>
-            <circle cx="260" cy="770" r="10" fill="var(--day3)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=武康大楼&city=上海" target="_blank" rel="noopener">
-            <circle cx="380" cy="470" r="26" fill="transparent"/>
-            <rect x="341" y="436" width="78" height="22" rx="6" fill="var(--card)" stroke="var(--day5)" stroke-width="1"/>
-            <text x="380" y="451.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">우캉따샤</text>
-            <circle cx="380" cy="470" r="10" fill="var(--day5)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=安福路&city=上海" target="_blank" rel="noopener">
-            <circle cx="400" cy="380" r="26" fill="transparent"/>
-            <rect x="367.5" y="346" width="65" height="22" rx="6" fill="var(--card)" stroke="var(--day5)" stroke-width="1"/>
-            <text x="400" y="361.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">안푸루</text>
-            <circle cx="400" cy="380" r="10" fill="var(--day5)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=天安千树&city=上海" target="_blank" rel="noopener">
-            <circle cx="400" cy="120" r="26" fill="transparent"/>
-            <rect x="355" y="86" width="90" height="22" rx="6" fill="var(--card)" stroke="var(--day5)" stroke-width="1"/>
-            <text x="400" y="101.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">1000 Trees</text>
-            <circle cx="400" cy="120" r="10" fill="var(--day5)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=新天地&city=上海" target="_blank" rel="noopener">
-            <circle cx="470" cy="310" r="26" fill="transparent"/>
-            <rect x="431" y="276" width="78" height="22" rx="6" fill="var(--card)" stroke="var(--day2)" stroke-width="1"/>
-            <text x="470" y="291.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">신티엔디</text>
-            <circle cx="470" cy="310" r="10" fill="var(--day2)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=豫园&city=上海" target="_blank" rel="noopener">
-            <circle cx="460" cy="210" r="26" fill="transparent"/>
-            <rect x="432.5" y="176" width="55" height="22" rx="6" fill="var(--card)" stroke="var(--day4)" stroke-width="1"/>
-            <text x="460" y="191.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">예원</text>
-            <circle cx="460" cy="210" r="10" fill="var(--day4)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=南京东路&city=上海" target="_blank" rel="noopener">
-            <circle cx="560" cy="190" r="26" fill="transparent"/>
-            <rect x="521" y="156" width="78" height="22" rx="6" fill="var(--card)" stroke="var(--day4)" stroke-width="1"/>
-            <text x="560" y="171.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">난징동루</text>
-            <circle cx="560" cy="190" r="10" fill="var(--day4)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=外滩&city=上海" target="_blank" rel="noopener">
-            <circle cx="630" cy="150" r="26" fill="transparent"/>
-            <rect x="597.5" y="116" width="65" height="22" rx="6" fill="var(--card)" stroke="var(--day4)" stroke-width="1"/>
-            <text x="630" y="131.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">와이탄</text>
-            <circle cx="630" cy="150" r="10" fill="var(--day4)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-
-          <a href="https://uri.amap.com/search?keyword=上海中心大厦&city=上海" target="_blank" rel="noopener">
-            <circle cx="730" cy="150" r="26" fill="transparent"/>
-            <rect x="687.5" y="116" width="85" height="22" rx="6" fill="var(--card)" stroke="var(--day4)" stroke-width="1"/>
-            <text x="730" y="131.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">루자쭈이</text>
-            <circle cx="730" cy="150" r="10" fill="var(--day4)" stroke="var(--card)" stroke-width="2.5"/>
-          </a>
-        </svg>
+      <div class="maplinks">
+        <a class="maplink gmap" href="https://www.google.com/maps/d/viewer?mid=1C0XcK5UYJgXHVQ9zqs4P5TQEE4dp6wc" target="_blank" rel="noopener">🌐 구글 지도에서 열기</a>
       </div>
-      <p class="map-caption">파란 띠 = 황푸강(위치 참고용, 실제 폭·굴곡 아님) · 점은 실제 방향·상대 위치 기준으로 배치했으나 축척은 아닙니다(이동 경로·순서 아님). 정확한 위치·길찾기·이동시간은 아래 목록에서 지도 앱으로 확인하세요.</p>
     </div>
 
     <div class="card">
@@ -1837,7 +1736,7 @@
 </script>
 
 
-<script id="encPayload" type="application/json">{"v":1,"iter":600000,"salt":"ZR2jEbGH5xMnkhc2aeU0Zw==","iv":"OYYhuEVkqdcXIJZy","ct":"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"}</script>
+<script id="encPayload" type="application/json">{"v":1,"iter":600000,"salt":"ZR2jEbGH5xMnkhc2aeU0Zw==","iv":"FqitXZoK0qft+FZi","ct":"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"}</script>
 <script>
 (function(){
   var P = JSON.parse(document.getElementById('encPayload').textContent);
