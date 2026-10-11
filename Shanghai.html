@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>상하이 여행 일정 (2026.10.15~19) v2</title>
+<style>
+  :root{
+    --bg:#f6f5f2;
+    --card:#ffffff;
+    --text:#1d1d1f;
+    --sub:#6b6b70;
+    --line:#e6e4de;
+    --accent:#b23b2e;
+    --accent-bg:#fbeae7;
+    --didi:#e8650a;
+    --didi-bg:#fff1e6;
+    --tag-ok:#2f7a4f;
+    --tag-ok-bg:#e6f4ea;
+    --tag-warn:#b8860b;
+    --tag-warn-bg:#fbf1dd;
+    --tag-todo:#a4322a;
+    --tag-todo-bg:#fbe8e6;
+    --chip-bg:#efece5;
+    --day1:#6b6b70;
+    --day2:#2f6db5;
+    --day3:#c9762b;
+    --day4:#7a4fb5;
+    --day5:#2f8f7a;
+    --home:#2f7a4f;
+    --river:#a9c9e6;
+    --land:#eef1ea;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17161a;
+      --card:#221f24;
+      --text:#f0eee9;
+      --sub:#a8a5ac;
+      --line:#37343a;
+      --accent:#e2776a;
+      --accent-bg:#3a2320;
+      --didi:#ff9a4d;
+      --didi-bg:#3a2816;
+      --tag-ok:#7fd39a;
+      --tag-ok-bg:#1e332a;
+      --tag-warn:#e8c778;
+      --tag-warn-bg:#3a2f18;
+      --tag-todo:#f0a49c;
+      --tag-todo-bg:#3a201e;
+      --chip-bg:#2c2930;
+      --day1:#a8a5ac;
+      --day2:#7fb3e6;
+      --day3:#f0a15c;
+      --day4:#b993e6;
+      --day5:#6fd6c1;
+      --home:#7fd39a;
+      --river:#2c4a63;
+      --land:#242229;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    padding-bottom:40px;
+    font-size:19px;
+  }
+  header.top{
+    padding:22px 18px 16px;
+    text-align:center;
+  }
+  header.top h1{
+    font-size:1.32em;
+    margin:0 0 4px;
+    letter-spacing:-0.3px;
+  }
+  header.top p{
+    margin:0;
+    color:var(--sub);
+    font-size:0.88em;
+  }
+  nav.tabbar{
+    position:sticky;
+    top:0;
+    z-index:10;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    padding:8px 12px;
+    background:var(--bg);
+    border-bottom:1px solid var(--line);
+    justify-content:center;
+  }
+  nav.tabbar button{
+    flex:0 0 auto;
+    text-decoration:none;
+    color:var(--text);
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:6px 12px;
+    font-size:0.82em;
+    white-space:nowrap;
+    font-family:inherit;
+    cursor:pointer;
+  }
+  nav.tabbar button.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:640px;
+    margin:0 auto;
+    padding:14px 14px 0;
+  }
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px 16px;
+    margin-bottom:14px;
+    scroll-margin-top:52px;
+  }
+  .card h2{
+    font-size:1em;
+    margin:0 0 10px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .kv{
+    display:grid;
+    grid-template-columns:74px 1fr;
+    gap:4px 8px;
+    font-size:0.86em;
+    margin-bottom:6px;
+  }
+  .kv .k{color:var(--sub);}
+  .kv .v{font-weight:500;}
+  .day-head{
+    padding:2px 2px 14px;
+  }
+  .day-head .d-title{font-size:1.15em;font-weight:700;}
+  .day-head .d-sub{
+    font-size:0.85em;
+    color:var(--sub);
+    margin-top:3px;
+  }
+  .day-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px 16px;
+    margin-bottom:14px;
+  }
+  .timeline{
+    margin-top:2px;
+  }
+  .item{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .item:last-child{border-bottom:none;}
+  .item .time{
+    font-size:0.8em;
+    color:var(--accent);
+    font-weight:700;
+    padding-top:1px;
+  }
+  .item .desc{font-size:0.92em;line-height:1.45;}
+  .tag{
+    display:inline-block;
+    font-size:0.72em;
+    padding:1px 7px;
+    border-radius:6px;
+    margin-left:5px;
+    font-weight:600;
+    vertical-align:1px;
+  }
+  .tag.ok{color:var(--tag-ok);background:var(--tag-ok-bg);}
+  .tag.warn{color:var(--tag-warn);background:var(--tag-warn-bg);}
+  .tag.todo{color:var(--tag-todo);background:var(--tag-todo-bg);}
+  .tag.muted{color:var(--sub);background:var(--chip-bg);}
+  .opt{
+    display:inline-block;
+    font-size:0.72em;
+    font-weight:700;
+    color:var(--accent);
+    background:var(--accent-bg);
+    border-radius:6px;
+    padding:1px 6px;
+    margin-right:5px;
+  }
+  .optline{display:block;margin-top:5px;}
+  .optline:first-of-type{margin-top:7px;}
+  .mapwrap{
+    position:relative;
+    width:100%;
+    line-height:0;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    margin-bottom:10px;
+    background:var(--bg);
+  }
+  .mapwrap svg{display:block;width:100%;height:auto;}
+  .mapwrap a{cursor:pointer;}
+  .map-caption{font-size:0.78em;color:var(--sub);margin:0 0 16px;line-height:1.5;}
+  .map-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 12px;
+    font-size:0.76em;
+    color:var(--sub);
+    margin:0 0 12px;
+  }
+  .map-legend span{display:inline-flex;align-items:center;gap:4px;}
+  .map-legend i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 auto;}
+  .daychip{
+    display:inline-block;
+    font-size:0.68em;
+    font-weight:700;
+    padding:1px 6px;
+    border-radius:6px;
+    margin-left:5px;
+    color:#fff;
+    vertical-align:1px;
+  }
+  .maplinks{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;}
+  .maplink{
+    font-size:0.78em;
+    font-weight:600;
+    padding:4px 10px;
+    border-radius:8px;
+    text-decoration:none;
+    border:1px solid var(--line);
+    color:var(--text);
+    background:var(--chip-bg);
+  }
+  .maplink.amap{color:var(--accent);border-color:var(--accent);background:var(--accent-bg);}
+  .maplink.didi{color:var(--didi);border-color:var(--didi);background:var(--didi-bg);}
+  .daychip.home{background:var(--home);}
+  .daychip.d1{background:var(--day1);}
+  .daychip.d2{background:var(--day2);}
+  .daychip.d3{background:var(--day3);}
+  .daychip.d4{background:var(--day4);}
+  .daychip.d5{background:var(--day5);}
+  .note{
+    margin-top:10px;
+    font-size:0.82em;
+    color:var(--sub);
+    background:var(--chip-bg);
+    border-radius:10px;
+    padding:8px 10px;
+    line-height:1.5;
+  }
+  .note b{color:var(--text);}
+  .banner{
+    background:var(--accent-bg);
+    color:var(--accent);
+    border-radius:12px;
+    padding:10px 14px;
+    font-size:0.85em;
+    margin:0 0 14px;
+    line-height:1.5;
+    font-weight:600;
+  }
+  .addr-list .a-item{
+    padding:8px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.86em;
+  }
+  .addr-list .a-item:last-child{border-bottom:none;}
+  .addr-list .a-name{font-weight:700;margin-bottom:5px;}
+  .addr-list .a-tip{color:var(--sub);font-size:0.85em;margin-top:4px;}
+  .cn-row{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+    margin:-2px 0 10px;
+  }
+  .cn-row .cn-label{
+    font-size:0.72em;
+    color:var(--sub);
+    flex:0 0 auto;
+  }
+  .cn-copy{
+    display:inline-block;
+    font-size:0.92em;
+    font-weight:700;
+    color:var(--text);
+    background:var(--chip-bg);
+    border-radius:6px;
+    padding:3px 9px;
+    line-height:1.5;
+    user-select:all;
+    cursor:pointer;
+  }
+  .cn-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(10,9,11,0.95);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+    padding:70px 24px;
+  }
+  .cn-modal.open{display:flex;}
+  .cn-modal-body{
+    max-width:100%;
+    max-height:100%;
+    overflow-y:auto;
+  }
+  .cn-modal-text{
+    color:#fff;
+    font-weight:800;
+    text-align:center;
+    line-height:1.35;
+    word-break:keep-all;
+    user-select:all;
+    max-width:100%;
+  }
+  .cn-modal-sub{
+    color:rgba(255,255,255,0.72);
+    font-weight:600;
+    text-align:center;
+    line-height:1.5;
+    word-break:keep-all;
+    user-select:all;
+    max-width:100%;
+    margin-top:22px;
+    display:none;
+  }
+  .cn-modal-sub.show{display:block;}
+  .cn-modal-actions{
+    position:absolute;
+    top:16px;
+    right:16px;
+    display:flex;
+    gap:8px;
+    z-index:2;
+  }
+  .cn-modal-btn{
+    border:none;
+    border-radius:999px;
+    padding:10px 16px;
+    font-size:0.95em;
+    font-weight:700;
+    cursor:pointer;
+    background:rgba(255,255,255,0.16);
+    color:#fff;
+  }
+  .cn-modal-btn:active{background:rgba(255,255,255,0.3);}
+  .cn-modal-close{
+    padding:10px 14px;
+    font-size:1.1em;
+    line-height:1;
+  }
+  .cn-copy-toast{
+    position:absolute;
+    bottom:36px;
+    left:50%;
+    transform:translateX(-50%) translateY(10px);
+    background:rgba(255,255,255,0.94);
+    color:#111;
+    padding:9px 18px;
+    border-radius:999px;
+    font-size:0.86em;
+    font-weight:700;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s, transform .2s;
+    white-space:nowrap;
+  }
+  .cn-copy-toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+  .app-desc{font-size:0.86em;color:var(--sub);margin:0 0 8px;line-height:1.5;}
+  ol.steps{margin:8px 0 0;padding-left:20px;font-size:0.88em;line-height:1.65;}
+  ol.steps li{margin-bottom:6px;}
+  .ref{margin-top:10px;font-size:0.78em;color:var(--sub);}
+  .ref a{color:var(--accent);text-decoration:none;}
+  .ref a:active,.ref a:hover{text-decoration:underline;}
+  a.food-link{
+    color:var(--accent);
+    font-weight:700;
+    text-decoration:none;
+    border-bottom:1px dashed var(--accent);
+  }
+  .card.flash{
+    animation:flash-highlight 1.6s ease;
+  }
+  @keyframes flash-highlight{
+    0%{background:var(--accent-bg);border-color:var(--accent);}
+    100%{background:var(--card);border-color:var(--line);}
+  }
+  footer{
+    text-align:center;
+    color:var(--sub);
+    font-size:0.76em;
+    padding:18px 20px 6px;
+  }
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:4px;}
+  table.local-table{border-collapse:collapse;width:100%;min-width:400px;font-size:0.82em;}
+  table.local-table th,table.local-table td{padding:8px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle;}
+  table.local-table th{color:var(--sub);font-weight:600;font-size:0.85em;white-space:nowrap;}
+  table.local-table tr:last-child td{border-bottom:none;}
+  table.local-table td.name-cell{font-weight:700;word-break:keep-all;min-width:6.5em;max-width:9.5em;}
+  table.local-table td.name-cell .cn-copy{margin-top:4px;font-size:0.86em;font-weight:600;padding:2px 7px;white-space:normal;word-break:break-all;max-width:10em;}
+  table.local-table td.note-cell{color:var(--sub);min-width:120px;}
+  table.local-table td.link-cell,table.local-table th:nth-last-child(-n+3){text-align:center;white-space:nowrap;padding-left:4px;padding-right:4px;}
+  table.local-table .maplink{padding:4px 6px;font-size:0.88em;}
+  .map-embed-wrap{margin-bottom:14px;}
+  .map-embed-wrap:last-child{margin-bottom:0;}
+  .map-embed-wrap h3{font-size:0.82em;margin:0 0 6px;color:var(--sub);font-weight:600;}
+  .gmap-frame{width:100%;height:280px;border:1px solid var(--line);border-radius:12px;display:block;}
+  .amap-box{width:100%;height:280px;border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative;background:var(--chip-bg);}
+  .amap-box .amap-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--sub);font-size:0.82em;line-height:1.5;}
+  .map-frame-outer{position:relative;}
+  .map-click-catch{
+    position:absolute;
+    inset:0;
+    z-index:3;
+    cursor:pointer;
+    background:transparent;
+    border:none;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .map-click-catch .zoom-hint{
+    position:absolute;
+    right:8px;
+    bottom:8px;
+    background:rgba(0,0,0,0.6);
+    color:#fff;
+    font-size:0.72em;
+    font-weight:600;
+    padding:4px 9px;
+    border-radius:999px;
+    pointer-events:none;
+  }
+  .map-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(10,9,11,0.97);
+    display:none;
+    flex-direction:column;
+    z-index:220;
+  }
+  .map-modal.open{display:flex;}
+  .map-modal-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px 14px;
+    padding-top:calc(12px + env(safe-area-inset-top, 0px));
+    color:#fff;
+  }
+  .map-modal-title{font-size:0.92em;font-weight:700;}
+  .map-modal-close{
+    flex:0 0 auto;
+    width:36px;
+    height:36px;
+    border-radius:999px;
+    border:none;
+    background:rgba(255,255,255,0.16);
+    color:#fff;
+    font-size:1.1em;
+    line-height:1;
+    cursor:pointer;
+  }
+  .map-modal-close:active{background:rgba(255,255,255,0.3);}
+  .map-modal-body{
+    flex:1;
+    min-height:0;
+    padding:0 10px calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+  .map-modal-body iframe,
+  .map-modal-body .amap-box{
+    width:100%;
+    height:100%;
+    border:none;
+    border-radius:10px;
+  }
+  .placeholder-box{
+    border:1px dashed var(--line);
+    border-radius:10px;
+    padding:22px 14px;
+    text-align:center;
+    color:var(--sub);
+    font-size:0.85em;
+    line-height:1.5;
+  }
+  .overview-table{border-collapse:collapse;width:100%;min-width:520px;font-size:0.84em;}
+  .overview-table th,.overview-table td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  .overview-table th{color:var(--sub);font-weight:600;font-size:0.85em;white-space:nowrap;}
+  .overview-table tr:last-child td{border-bottom:none;}
+  .overview-table td.day-cell{font-weight:700;white-space:nowrap;}
+  .overview-table td.place-cell{color:var(--text);}
+  .overview-table td.desc-cell{color:var(--sub);}
+  .to-top-btn{
+    position:fixed;
+    right:16px;
+    bottom:calc(18px + env(safe-area-inset-bottom, 0px));
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--accent);
+    color:#fff;
+    font-size:1.15em;
+    line-height:1;
+    box-shadow:0 4px 14px rgba(0,0,0,0.28);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:150;
+    opacity:0;
+    transform:translateY(10px);
+    pointer-events:none;
+    transition:opacity .2s, transform .2s;
+  }
+  .to-top-btn.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+  .to-top-btn:active{background:var(--accent);opacity:0.8;}
+</style>
+
+<style>
+  .lock-desc{ color:var(--sub); font-size:14px; line-height:1.5; margin:4px 0 14px; }
+  .lock-input{ width:100%; box-sizing:border-box; font-size:16px; padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--text); }
+  .lock-input:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+  .lock-remember{ display:flex; align-items:center; gap:6px; margin:12px 0; font-size:14px; color:var(--sub); }
+  .lock-btn{ width:100%; font-size:16px; font-weight:600; padding:12px; border:0; border-radius:10px; background:var(--accent); color:#fff; cursor:pointer; }
+  .lock-btn:disabled{ opacity:.6; }
+  .lock-msg{ min-height:1.4em; margin-top:10px; font-size:14px; color:var(--tag-todo); }
+  .lock-relock{ display:block; margin:8px auto 0; font-size:13px; color:var(--sub); background:none; border:0; text-decoration:underline; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>🇨🇳 상하이 여행 일정</h1>
+  <p>2026.10.15(목) ~ 10.19(월) · 4박 5일</p>
+</header>
+
+<nav class="tabbar" id="tabbar">
+  <button data-tab="quick" class="active">예약</button>
+  <button data-tab="overview">개요</button>
+  <button data-tab="day1">15(목)</button>
+  <button data-tab="day2">16(금)</button>
+  <button data-tab="day3">17(토)</button>
+  <button data-tab="day4">18(일)</button>
+  <button data-tab="day5">19(월)</button>
+  <button data-tab="prep">사전준비</button>
+  <button data-tab="tips">중국여행팁</button>
+</nav>
+
+<main>
+
+  <!-- QUICK -->
+  <section class="panel active" id="panel-quick">
+
+    <div class="card lock-card" id="lockCard">
+      <h2>🔒 예약 정보 보호됨</h2>
+      <p class="lock-desc">항공·호텔·테니스 예약 정보는 비밀번호를 입력해야 볼 수 있습니다. 다른 탭(일정·맛집 등)은 바로 이용할 수 있습니다.</p>
+      <form id="lockForm" autocomplete="off">
+        <input type="password" id="lockInput" class="lock-input" placeholder="비밀번호" autocomplete="current-password" enterkeyhint="go">
+        <label class="lock-remember"><input type="checkbox" id="lockRemember"> 이 기기에서 기억하기</label>
+        <button type="submit" class="lock-btn" id="lockBtn">열기</button>
+        <div class="lock-msg" id="lockMsg" role="alert"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="panel" id="panel-overview">
+    <div class="card">
+      <h2>🧭 일자별 개요</h2>
+      <p class="app-desc">4박 5일 전체 일정을 한눈에 · 상세 시간표는 날짜별 탭에서 확인하세요.</p>
+      <div class="table-scroll">
+        <table class="overview-table">
+          <thead><tr><th>일자</th><th>주요 방문지</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="day-cell">Day1<br>10/15(목)</td>
+              <td class="place-cell">홍차오공항 → 호텔</td>
+              <td class="desc-cell">오후 도착, 체크인 후 휴식·저녁</td>
+            </tr>
+            <tr>
+              <td class="day-cell">Day2<br>10/16(금)</td>
+              <td class="place-cell">주가각 · 신티엔디 · 임시정부청사</td>
+              <td class="desc-cell">오전 수향마을 관광, 오후 임시정부·신티엔디</td>
+            </tr>
+            <tr>
+              <td class="day-cell">Day3<br>10/17(토)</td>
+              <td class="place-cell">치중 테니스 센터</td>
+              <td class="desc-cell">상하이 마스터스 테니스 종일 관람</td>
+            </tr>
+            <tr>
+              <td class="day-cell">Day4<br>10/18(일)</td>
+              <td class="place-cell">예원 · 난징동루 · 와이탄 · 루자쭈이</td>
+              <td class="desc-cell">구시가지~번화가~야경 코스</td>
+            </tr>
+            <tr>
+              <td class="day-cell">Day5<br>10/19(월)</td>
+              <td class="place-cell">우캉맨션 · 안푸루 · 스타벅스 로스터리 · 1000 Trees</td>
+              <td class="desc-cell">오전 산책·브런치, 오후 로스터리·1000 Trees 후 공항 이동, 귀국</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="banner">
+      🗺️ 아래는 메뉴 정비 전 '지도' 탭에 있던 전체 위치 안내도를 그대로 옮겨온 것입니다. 일자별 동선 지도가 준비되면 구성이 달라질 수 있습니다.
+    </div>
+
+    <div class="card">
+      <h2>🗺️ 주요 장소 위치 지도</h2>
+      <p class="app-desc">호텔을 기준으로 각 목적지가 실제로 어느 방향·구역에 있는지 한눈에 확인 · 원을 탭하면 고덕지도로 이동</p>
+      <div class="map-legend">
+        <span><i style="background:var(--home)"></i>호텔(기준)</span>
+        <span><i style="background:var(--day1)"></i>Day1·5 이동일</span>
+        <span><i style="background:var(--day2)"></i>Day2</span>
+        <span><i style="background:var(--day3)"></i>Day3 테니스</span>
+        <span><i style="background:var(--day4)"></i>Day4</span>
+        <span><i style="background:var(--day5)"></i>Day5</span>
+      </div>
+      <div class="mapwrap">
+        <svg viewBox="0 0 790 820" role="img" aria-label="상하이 여행 주요 장소 위치 지도">
+          <rect x="0" y="0" width="790" height="820" fill="var(--land)"/>
+          <path d="M 685,0 Q 655,150 665,450 Q 675,650 615,820" fill="none" stroke="var(--river)" stroke-width="60" stroke-linecap="round" opacity="0.75"/>
+          <text x="712" y="285" font-size="12" font-weight="600" fill="var(--sub)" transform="rotate(80 712 285)">황푸강</text>
+          <g opacity="0.6" stroke="var(--sub)" stroke-width="1.6">
+            <line x1="750" y1="55" x2="750" y2="30"/>
+            <path d="M743,38 L750,28 L757,38" fill="none"/>
+          </g>
+          <text x="750" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="var(--sub)">N</text>
+
+          <a href="https://uri.amap.com/search?keyword=朱家角古镇&city=上海" target="_blank" rel="noopener">
+            <circle cx="80" cy="600" r="26" fill="transparent"/>
+            <rect x="47.5" y="566" width="65" height="22" rx="6" fill="var(--card)" stroke="var(--day2)" stroke-width="1"/>
+            <text x="80" y="581.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">주가각</text>
+            <circle cx="80" cy="600" r="10" fill="var(--day2)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=上海虹桥国际机场&city=上海" target="_blank" rel="noopener">
+            <circle cx="110" cy="430" r="26" fill="transparent"/>
+            <rect x="65" y="396" width="90" height="22" rx="6" fill="var(--card)" stroke="var(--day1)" stroke-width="1"/>
+            <text x="110" y="411.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">홍차오공항</text>
+            <circle cx="110" cy="430" r="10" fill="var(--day1)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=上海虹桥万丽酒店&city=上海" target="_blank" rel="noopener">
+            <circle cx="230" cy="440" r="30" fill="transparent"/>
+            <rect x="193" y="398" width="74" height="24" rx="7" fill="var(--card)" stroke="var(--home)" stroke-width="1.4"/>
+            <text x="230" y="414.5" text-anchor="middle" font-size="14" font-weight="800" fill="var(--home)">호텔</text>
+            <circle cx="230" cy="440" r="13" fill="var(--home)" stroke="var(--card)" stroke-width="3"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=旗忠网球中心&city=上海" target="_blank" rel="noopener">
+            <circle cx="260" cy="770" r="26" fill="transparent"/>
+            <rect x="208" y="736" width="104" height="22" rx="6" fill="var(--card)" stroke="var(--day3)" stroke-width="1"/>
+            <text x="260" y="751.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">테니스경기장</text>
+            <circle cx="260" cy="770" r="10" fill="var(--day3)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=武康大楼&city=上海" target="_blank" rel="noopener">
+            <circle cx="380" cy="470" r="26" fill="transparent"/>
+            <rect x="341" y="436" width="78" height="22" rx="6" fill="var(--card)" stroke="var(--day5)" stroke-width="1"/>
+            <text x="380" y="451.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">우캉따샤</text>
+            <circle cx="380" cy="470" r="10" fill="var(--day5)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=安福路&city=上海" target="_blank" rel="noopener">
+            <circle cx="400" cy="380" r="26" fill="transparent"/>
+            <rect x="367.5" y="346" width="65" height="22" rx="6" fill="var(--card)" stroke="var(--day5)" stroke-width="1"/>
+            <text x="400" y="361.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">안푸루</text>
+            <circle cx="400" cy="380" r="10" fill="var(--day5)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=天安千树&city=上海" target="_blank" rel="noopener">
+            <circle cx="400" cy="120" r="26" fill="transparent"/>
+            <rect x="355" y="86" width="90" height="22" rx="6" fill="var(--card)" stroke="var(--day5)" stroke-width="1"/>
+            <text x="400" y="101.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">1000 Trees</text>
+            <circle cx="400" cy="120" r="10" fill="var(--day5)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=新天地&city=上海" target="_blank" rel="noopener">
+            <circle cx="470" cy="310" r="26" fill="transparent"/>
+            <rect x="431" y="276" width="78" height="22" rx="6" fill="var(--card)" stroke="var(--day2)" stroke-width="1"/>
+            <text x="470" y="291.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">신티엔디</text>
+            <circle cx="470" cy="310" r="10" fill="var(--day2)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=豫园&city=上海" target="_blank" rel="noopener">
+            <circle cx="460" cy="210" r="26" fill="transparent"/>
+            <rect x="432.5" y="176" width="55" height="22" rx="6" fill="var(--card)" stroke="var(--day4)" stroke-width="1"/>
+            <text x="460" y="191.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">예원</text>
+            <circle cx="460" cy="210" r="10" fill="var(--day4)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=南京东路&city=上海" target="_blank" rel="noopener">
+            <circle cx="560" cy="190" r="26" fill="transparent"/>
+            <rect x="521" y="156" width="78" height="22" rx="6" fill="var(--card)" stroke="var(--day4)" stroke-width="1"/>
+            <text x="560" y="171.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">난징동루</text>
+            <circle cx="560" cy="190" r="10" fill="var(--day4)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=外滩&city=上海" target="_blank" rel="noopener">
+            <circle cx="630" cy="150" r="26" fill="transparent"/>
+            <rect x="597.5" y="116" width="65" height="22" rx="6" fill="var(--card)" stroke="var(--day4)" stroke-width="1"/>
+            <text x="630" y="131.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">와이탄</text>
+            <circle cx="630" cy="150" r="10" fill="var(--day4)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+
+          <a href="https://uri.amap.com/search?keyword=上海中心大厦&city=上海" target="_blank" rel="noopener">
+            <circle cx="730" cy="150" r="26" fill="transparent"/>
+            <rect x="687.5" y="116" width="85" height="22" rx="6" fill="var(--card)" stroke="var(--day4)" stroke-width="1"/>
+            <text x="730" y="131.5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">루자쭈이</text>
+            <circle cx="730" cy="150" r="10" fill="var(--day4)" stroke="var(--card)" stroke-width="2.5"/>
+          </a>
+        </svg>
+      </div>
+      <p class="map-caption">파란 띠 = 황푸강(위치 참고용, 실제 폭·굴곡 아님) · 점은 실제 방향·상대 위치 기준으로 배치했으나 축척은 아닙니다(이동 경로·순서 아님). 정확한 위치·길찾기·이동시간은 아래 목록에서 지도 앱으로 확인하세요.</p>
+    </div>
+
+    <div class="card">
+      <h2>📍 목적지 바로가기</h2>
+      <p class="app-desc">목적지를 탭하면 지도 앱에서 바로 열립니다. 중국 현지에서는 고덕지도(Amap) 사용을 권장하며, 구글지도는 출국 전 확인용·VPN 사용 시 참고용입니다. 🚕 디디 버튼은 중국어 장소명을 복사한 뒤 알리페이의 디디 미니프로그램을 엽니다. 목적지 칸에 붙여넣기 하세요.</p>
+      <div class="addr-list">
+        <div class="a-item">
+          <div class="a-name">호텔 (Renaissance Shanghai Hongqiao) <span class="daychip home">기준</span></div>
+          <div class="maplinks">
+            <a class="maplink amap" href="https://uri.amap.com/search?keyword=上海虹桥万丽酒店&city=上海" target="_blank" rel="noopener">📍 고덕지도</a>
+            <a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=上海虹桥万丽酒店,上海" target="_blank" rel="noopener">🌐 Google지도</a>
+            <a class="maplink didi" href="#" data-didi="上海虹桥万丽酒店">🚕 디디</a>
+          </div>
+        </div>
+        <div class="a-item">
+          <div class="a-name">홍차오공항 <span class="daychip d1">Day1·5</span></div>
+          <div class="maplinks">
+            <a class="maplink amap" href="https://uri.amap.com/search?keyword=上海虹桥国际机场&city=上海" target="_blank" rel="noopener">📍 고덕지도</a>
+            <a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=上海虹桥国际机场,上海" target="_blank" rel="noopener">🌐 Google지도</a>
+            <a class="maplink didi" href="#" data-didi="上海虹桥国际机场">🚕 디디</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- DAY 1 -->
+  <section class="panel" id="panel-day1">
+    <div class="day-head">
+      <div class="d-title">Day 1 · 10/15(목)</div>
+      <div class="d-sub">김포 → 상하이 홍차오 · 도착 & 휴식</div>
+    </div>
+    <div class="day-card">
+      <div class="timeline">
+        <div class="item"><div class="time">16:00</div><div class="desc">김포 출발 (KE2057)</div></div>
+        <div class="item"><div class="time">18:05</div><div class="desc">상하이 홍차오공항 도착</div></div>
+        <div class="item"><div class="time">18:05~<br>18:40</div><div class="desc">입국 수속 · 수하물 · 호텔 이동 <span class="tag ok">공항↔호텔 10~15분</span></div></div>
+        <div class="item"><div class="time">19:00</div><div class="desc">호텔 체크인 (Renaissance Shanghai Hongqiao)</div></div>
+        <div class="item"><div class="time">19:30~</div><div class="desc">🍽️ 저녁 (도착 첫날 · 후보 검토 중)
+          <span class="optline"><span class="opt">1안</span> <a href="#rest-foodstudio" class="food-link" data-target="rest-foodstudio">호텔 내 Food Studio</a> <span class="tag ok">예약불필요</span></span>
+          <span class="optline"><span class="opt">2안</span> <a href="#rest-soho3911" class="food-link" data-target="rest-soho3911">SoHo3911 다이닝거리</a> <span class="tag ok">예약불필요</span></span>
+          <span class="optline"><span class="opt">3안</span> <a href="#rest-uokura" class="food-link" data-target="rest-uokura">鱼藏 Uo Kura (일식)</a> <span class="tag warn">예약 권장</span></span>
+        </div></div>
+      </div>
+      <div class="note">홍차오공항이 호텔과 가까워 첫날에도 여유가 있습니다. 컨디션에 따라 저녁 식사 후 가벼운 근교 산책도 가능합니다. 호텔 주변(창닝구 홍차오로 일대)은 관광지보다는 주거·오피스 지역이라 도보권 맛집이 많지 않아, 편하게는 호텔 식당을, 조금 더 나가고 싶다면 택시로 10~15분 거리를 권장합니다.</div>
+    </div>
+
+    <div class="card">
+      <h2>🗺️ 동선 지도</h2>
+      <div class="map-embed-wrap">
+        <h3>고덕지도(Amap) · 현지에서 사용</h3>
+        <div class="map-frame-outer">
+          <div class="amap-box" id="amap-day1" data-places="上海虹桥国际机场|上海虹桥万丽酒店">
+            <div class="amap-fallback">고덕지도 API 키가 아직 설정되지 않았습니다.</div>
+          </div>
+          <button type="button" class="map-click-catch" data-modal-title="Day1 · 고덕지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+      <div class="map-embed-wrap">
+        <h3>구글지도 · 사전 계획용 (중국 현지에서는 VPN 필요)</h3>
+        <div class="map-frame-outer">
+          <iframe class="gmap-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?saddr=上海虹桥国际机场&daddr=上海市长宁区虹桥路2270号&output=embed"></iframe>
+          <button type="button" class="map-click-catch" data-modal-title="Day1 · 구글지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📍 주소록</h2>
+      <div class="table-scroll">
+        <table class="local-table">
+          <thead><tr><th>장소명</th><th>비고</th><th>고덕</th><th>구글</th><th>디디</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="name-cell">호텔<br><span class="cn-copy" data-cn-name="上海虹桥万丽酒店" data-cn-addr="上海市长宁区虹桥路2270号">上海虹桥万丽酒店</span></td>
+              <td class="note-cell">체크인 14:00, 숙소 기준점</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=上海虹桥万丽酒店&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=上海虹桥万丽酒店,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="上海虹桥万丽酒店">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">홍차오공항<br><span class="cn-copy" data-cn-name="上海虹桥国际机场">上海虹桥国际机场</span></td>
+              <td class="note-cell">김포 출발 도착지(Day1) · 귀국 출발지(Day5)</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=上海虹桥国际机场&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=上海虹桥国际机场,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="上海虹桥国际机场">🚕</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="banner" style="margin-top:4px;">🍽️ Day1 추천 식당</div>
+
+    <div class="card" id="rest-foodstudio">
+      <h2>🍽️ Food Studio (호텔 내 레스토랑)</h2>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 1 · 10/15(목) 저녁 <span class="tag warn">1안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">Renaissance Shanghai Hongqiao 호텔 내</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">올데이 다이닝 — 인터내셔널 요리 뷔페/단품</div></div>
+      <div class="kv"><div class="k">장점</div><div class="v"><span class="tag ok">이동 없음</span> 장거리 비행 후 도착 첫날 가장 무난한 선택</div></div>
+      <div class="ref">📖 참고: <a href="https://www.marriott.com/en-us/hotels/shahr-renaissance-shanghai-hongqiao/overview/" target="_blank" rel="noopener">Renaissance Shanghai Hongqiao 공식 페이지 (Marriott)</a></div>
+    </div>
+
+    <div class="card" id="rest-soho3911">
+      <h2>🍢 SoHo3911 다이닝거리</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="虹梅路3911号">SoHo3911 (虹梅路3911号)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 1 · 10/15(목) 저녁 <span class="tag warn">2안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">虹梅路3911号 (호텔에서 택시 약 10~15분)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">철판구이·이자카야·퓨전양식 등 다양한 레스토랑이 모인 다이닝 거리</div></div>
+      <div class="kv"><div class="k">참고</div><div class="v">여러 매장 중 골라서 워크인 가능, 가볍게 둘러보기 좋음</div></div>
+      <div class="note">⚠️ 한글 블로그 후기를 찾지 못했습니다 — 방문 전 고덕지도/다중디앤핑(大众点评)에서 매장별 영업시간을 확인하세요.</div>
+    </div>
+
+    <div class="card" id="rest-uokura">
+      <h2>🍣 鱼藏 Uo Kura (일식)</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="鱼藏">Uo Kura (鱼藏)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 1 · 10/15(목) 저녁 <span class="tag warn">3안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">虹桥路1452号 古北国际财富中心 B1 (호텔에서 택시 약 10~15분)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">스시·사시미 중심 일식</div></div>
+      <div class="kv"><div class="k">예약</div><div class="v"><span class="tag warn">예약 권장</span> 퀄리티 좋은 편으로 저녁 시간대 붐빌 수 있음</div></div>
+      <div class="note">⚠️ 한글 블로그 후기를 찾지 못했습니다 — 방문 전 고덕지도/다중디앤핑(大众点评)에서 최신 후기를 확인하세요.</div>
+    </div>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="panel" id="panel-day2">
+    <div class="day-head">
+      <div class="d-title">Day 2 · 10/16(금)</div>
+      <div class="d-sub">주가각(오전) + 신티엔디 · 임시정부(오후)</div>
+    </div>
+    <div class="day-card">
+      <div class="timeline">
+        <div class="item"><div class="time">08:00</div><div class="desc">🍽️ 호텔 조식</div></div>
+        <div class="item"><div class="time">09:00</div><div class="desc">주가각(朱家角) 출발 <span class="tag ok">차량 30~40분</span></div></div>
+        <div class="item"><div class="time">10:00~<br>13:00</div><div class="desc">주가각 수향마을 — 팡성차오(放生桥), 뱃놀이, 베이다제(北大街) 옛거리</div></div>
+        <div class="item"><div class="time">12:00</div><div class="desc">🍽️ 점심: <a href="#rest-zhujiajiao" class="food-link" data-target="rest-zhujiajiao">아포쭝(阿婆粽) · 짜육면(扎肉面)</a> 등 현지 노포 <span class="tag ok">예약불필요</span></div></div>
+        <div class="item"><div class="time">13:30</div><div class="desc">호텔 방향 복귀</div></div>
+        <div class="item"><div class="time">15:00</div><div class="desc">신티엔디(新天地) 이동</div></div>
+        <div class="item"><div class="time">15:00~<br>16:00</div><div class="desc">대한민국 임시정부 청사(마당로) 관람 <span class="tag ok">현장구매 20위안</span></div></div>
+        <div class="item"><div class="time">16:00~<br>17:30</div><div class="desc">신티엔디 스톤 거리 산책 (혼잡 전 시간대)</div></div>
+        <div class="item"><div class="time">18:00</div><div class="desc">🍽️ 저녁 (신티엔디 인근 · 후보 검토 중)
+          <span class="optline"><span class="opt">1안</span> <a href="#rest-laojishi" class="food-link" data-target="rest-laojishi">老吉士 환마오iapm점</a> <span class="tag warn">예약 권장</span></span>
+          <span class="optline"><span class="opt">2안</span> <a href="#rest-diandude" class="food-link" data-target="rest-diandude">정도덕(点都德) 신천지 인근점</a> <span class="tag ok">예약불필요</span></span>
+        </div></div>
+      </div>
+      <div class="note">
+        <b>임시정부 청사</b> — 개방 09:00~17:00, 월요일 휴관, 입장료 20위안/인. 매표소는 청사 건물이 아니라 맞은편 골목 입구에 별도 위치. 사전예약 불필요.<br><br>
+        <b>老吉士(환마오iapm점)</b> — 徐汇区淮海中路999号环贸iapm商场L3, +86-64229091. 인기가 많아 대기가 긴 편으로, 전화 예약은 최소 2주 전 권장. 예약이 어렵다면 오후 4:30 전후 도착해 현장 대기 등록.<br><br>
+        주가각(칭푸구)이 홍차오 호텔과 가까워 오전 동선이 효율적이며, 임시정부 청사는 월요일 휴관이라 10/19이 아닌 이 날 배치했습니다.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🗺️ 동선 지도</h2>
+      <div class="map-embed-wrap">
+        <h3>고덕지도(Amap) · 현지에서 사용</h3>
+        <div class="map-frame-outer">
+          <div class="amap-box" id="amap-day2" data-places="上海虹桥万丽酒店|朱家角古镇|新天地|大韩民国临时政府旧址">
+            <div class="amap-fallback">고덕지도 API 키가 아직 설정되지 않았습니다.</div>
+          </div>
+          <button type="button" class="map-click-catch" data-modal-title="Day2 · 고덕지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+      <div class="map-embed-wrap">
+        <h3>구글지도 · 사전 계획용 (중국 현지에서는 VPN 필요)</h3>
+        <div class="map-frame-outer">
+          <iframe class="gmap-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?saddr=上海市长宁区虹桥路2270号&daddr=朱家角古镇+to:Xintiandi+Shanghai+to:上海市黄浦区马当路306弄4号+to:上海市长宁区虹桥路2270号&output=embed"></iframe>
+          <button type="button" class="map-click-catch" data-modal-title="Day2 · 구글지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📍 주소록</h2>
+      <div class="table-scroll">
+        <table class="local-table">
+          <thead><tr><th>장소명</th><th>비고</th><th>고덕</th><th>구글</th><th>디디</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="name-cell">주가각 고진<br><span class="cn-copy" data-cn-name="朱家角古镇" data-cn-addr="上海市青浦区朱家角古镇">朱家角古镇</span></td>
+              <td class="note-cell">수향마을, 뱃놀이·옛거리 산책</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=朱家角古镇&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=朱家角古镇,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="朱家角古镇">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">신티엔디<br><span class="cn-copy" data-cn-name="新天地">新天地</span></td>
+              <td class="note-cell">스톤 거리, 상하이 옛 골목 상업지구</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=新天地&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=新天地,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="新天地">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">대한민국 임시정부 청사<br><span class="cn-copy" data-cn-name="大韩民国临时政府旧址" data-cn-addr="上海市黄浦区马当路306弄4号">大韩民国临时政府旧址</span></td>
+              <td class="note-cell">마당로 골목 안, 매표소 별도위치</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=大韩民国临时政府旧址&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=大韩民国临时政府旧址,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="大韩民国临时政府旧址">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">라오지스 (환마오iapm점)<br><span class="cn-copy" data-cn-name="老吉士" data-cn-addr="上海市徐汇区淮海中路999号环贸iapm商场L3">老吉士</span></td>
+              <td class="note-cell">미슐랭 맛집, 전화예약 권장 +86-64229091</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=老吉士&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=老吉士,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="老吉士">🚕</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="banner" style="margin-top:4px;">🍽️ Day2 추천 식당</div>
+
+    <div class="card" id="rest-zhujiajiao">
+      <h2>🥟 아포쭝 · 짜육면 (주가각 노포)</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="阿婆粽">아포쭝 (阿婆粽)</span><span class="cn-copy" data-cn="扎肉面">짜육면 (扎肉面)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 2 · 10/16(금) 점심</div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">주가각 고진 내 베이다제(北大街) 일대 노포</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">아포쭝(阿婆粽, 대나무잎 쫑쯔) · 짜육면(扎肉面)</div></div>
+      <div class="kv"><div class="k">예약</div><div class="v"><span class="tag ok">불필요</span> 노점/식당 다수, 현장 구매</div></div>
+      <div class="ref">📖 참고: <a href="https://kr.trip.com/moments/detail/shanghai-2-119196959/" target="_blank" rel="noopener">상하이 수향마을 당일치기 추천 ♥ 주가각(朱家角) (트립닷컴)</a></div>
+    </div>
+
+    <div class="card" id="rest-laojishi">
+      <h2>🍷 老吉士 (라오지스) · 환마오iapm점</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="老吉士">라오지스 (老吉士)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 2 · 10/16(금) 저녁</div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">徐汇区淮海中路999号环贸iapm商场L3 (신티엔디 인근)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">본방차이(上海本帮菜) — 홍소육(红烧肉), 파기름 볶음면(葱油拌面) 등</div></div>
+      <div class="kv"><div class="k">예약</div><div class="v"><span class="tag warn">전화예약 권장</span> 최소 2주 전, 또는 오후 4:30 현장대기</div></div>
+      <div class="ref">📖 참고: <a href="https://kr.trip.com/moments/poi-jesse-restaurant-10561431/" target="_blank" rel="noopener">라오지스 레스토랑(톈핑루점) 방문 후기 (트립닷컴)</a></div>
+    </div>
+
+    <div class="card" id="rest-diandude">
+      <h2>🥟 정도덕 (点都德)</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="点都德">정도덕 (点都德)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 2 · 10/16(금) 저녁 <span class="tag warn">2안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">광둥식 딤섬 전문점, 상하이 내 다수 지점 (푸동 슈퍼브랜드몰점 등)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">홍미창펀(虾米肠粉, 새우튀김 쌀피롤) · 새우만두(하가우)</div></div>
+      <div class="kv"><div class="k">참고</div><div class="v">한국어 메뉴판 제공, 홍미창펀/새우만두 각 44위안 내외</div></div>
+      <div class="ref">📖 참고: <a href="https://guide.theawesomestyle.com/entry/%EC%83%81%ED%95%98%EC%9D%B4-%EC%A0%90%EB%8F%84%EB%8D%95%E7%82%B9%E9%83%BD%E5%BE%B7-%EA%B4%91%EB%91%A5%EC%8B%9D-%EB%94%A4%EC%84%AC-%EC%A0%84%EB%AC%B8%EC%A0%90%EC%97%90%EC%84%9C-%ED%99%8D%EB%AF%B8%EC%B0%BD%ED%8E%80-%EB%A8%B9%EA%B8%B0" target="_blank" rel="noopener">상하이 점도덕(点都德): 광둥식 딤섬 전문점에서 홍미창펀 먹기</a></div>
+    </div>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="panel" id="panel-day3">
+    <div class="day-head">
+      <div class="d-title">Day 3 · 10/17(토)</div>
+      <div class="d-sub">상하이 마스터스 테니스 관람 (종일)</div>
+    </div>
+    <div class="day-card">
+      <div class="timeline">
+        <div class="item"><div class="time">09:00</div><div class="desc">🍽️ 조식, 출발 준비</div></div>
+        <div class="item"><div class="time">10:30</div><div class="desc">치중 테니스 센터(민항구) 이동 <span class="tag ok">차량 약 30분</span></div></div>
+        <div class="item"><div class="time">11:00~</div><div class="desc">경기장 도착, 주변 둘러보기</div></div>
+        <div class="item"><div class="time">14:00~<br>밤</div><div class="desc">경기 관람</div></div>
+        <div class="item"><div class="time">식사</div><div class="desc">🍽️ 경기장 내 식음료 이용</div></div>
+        <div class="item"><div class="time">22:00~</div><div class="desc">호텔 복귀</div></div>
+      </div>
+      <div class="note">
+        종일권(주간+야간) 티켓이라 이 날은 별도 관광 없이 테니스 관람에 집중합니다.<br>
+        예상: 단식 준결승 2경기 (2024·2025년 패턴 기준 추정, 확정 아님). <b>출국 전 en.rolexshanghaimasters.com/en/scores/schedule 에서 반드시 재확인.</b><br><br>
+        <span class="tag todo">참고(비공식)</span> 티켓 판매 사이트 koobit에는 10/17 첫 경기가 14:00 시작으로 안내되어 있으나, 공식 확정 정보가 아니며 해당 사이트도 "사전 통보 없이 변경될 수 있음"을 명시하고 있습니다. 출처: <a href="https://www.koobit.com/shanghai-masters-e425" target="_blank" rel="noopener">koobit.com</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🗺️ 동선 지도</h2>
+      <div class="map-embed-wrap">
+        <h3>고덕지도(Amap) · 현지에서 사용</h3>
+        <div class="map-frame-outer">
+          <div class="amap-box" id="amap-day3" data-places="上海虹桥万丽酒店|旗忠网球中心">
+            <div class="amap-fallback">고덕지도 API 키가 아직 설정되지 않았습니다.</div>
+          </div>
+          <button type="button" class="map-click-catch" data-modal-title="Day3 · 고덕지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+      <div class="map-embed-wrap">
+        <h3>구글지도 · 사전 계획용 (중국 현지에서는 VPN 필요)</h3>
+        <div class="map-frame-outer">
+          <iframe class="gmap-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?saddr=上海市长宁区虹桥路2270号&daddr=上海市闵行区元江路5500号+to:上海市长宁区虹桥路2270号&output=embed"></iframe>
+          <button type="button" class="map-click-catch" data-modal-title="Day3 · 구글지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📍 주소록</h2>
+      <div class="table-scroll">
+        <table class="local-table">
+          <thead><tr><th>장소명</th><th>비고</th><th>고덕</th><th>구글</th><th>디디</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="name-cell">치중 테니스 센터<br><span class="cn-copy" data-cn-name="旗忠网球中心" data-cn-addr="上海市闵行区元江路5500号">旗忠网球中心</span></td>
+              <td class="note-cell">2026 상하이 마스터스 테니스 경기장</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=旗忠网球中心&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=旗忠网球中心,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="旗忠网球中心">🚕</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY 4 -->
+  <section class="panel" id="panel-day4">
+    <div class="day-head">
+      <div class="d-title">Day 4 · 10/18(일)</div>
+      <div class="d-sub">예원 → 난징동루 → 와이탄 → 루자쭈이(야경)</div>
+    </div>
+    <div class="day-card">
+      <div class="timeline">
+        <div class="item"><div class="time">08:00~<br>09:00</div><div class="desc">호텔 테니스 코트 이용</div></div>
+        <div class="item"><div class="time">09:30</div><div class="desc">🍽️ 조식</div></div>
+        <div class="item"><div class="time">10:00</div><div class="desc">예원(豫园) 이동 <span class="tag ok">지하철 10호선 직결, 약 35~40분</span></div></div>
+        <div class="item"><div class="time">10:30~<br>12:00</div><div class="desc">예원 관람 (오전 비교적 한산)</div></div>
+        <div class="item"><div class="time">12:00</div><div class="desc">🍽️ 점심 (예원 인근 · 후보 검토 중)
+          <span class="optline"><span class="opt">1안</span> <a href="#rest-jiajia" class="food-link" data-target="rest-jiajia">佳家汤包(리위안루점)</a> 게살 샤오롱바오 <span class="tag ok">대기 짧은 편</span></span>
+          <span class="optline"><span class="opt">2안</span> <a href="#rest-nanxiang" class="food-link" data-target="rest-nanxiang">남상만두(南翔馒头店) 예원점</a> 빨대만두</span>
+          <span class="optline"><span class="opt">3안</span> <a href="#rest-yuxingji" class="food-link" data-target="rest-yuxingji">위싱지(裕兴记)</a> 게살국수</span>
+        </div></div>
+        <div class="item"><div class="time">13:00</div><div class="desc">도보/1정거장 → 난징동루(南京东路)</div></div>
+        <div class="item"><div class="time">13:00~<br>14:30</div><div class="desc">난징동루 쇼핑거리 산책 · 🍽️ 간식 (후보 검토 중)
+          <span class="optline"><span class="opt">1안</span> <a href="#rest-xiaoyang" class="food-link" data-target="rest-xiaoyang">小杨生煎(샤오양셩지엔)</a> 셩지엔바오</span>
+          <span class="optline"><span class="opt">2안</span> <a href="#rest-dahuchun" class="food-link" data-target="rest-dahuchun">대호춘(大壶春)</a> 셩지엔바오 <span class="tag warn">미슐랭</span></span>
+          <span class="optline"><span class="opt">3안</span> <a href="#rest-lailai" class="food-link" data-target="rest-lailai">라이라이샤오롱(莱莱小笼)</a> 딤섬·완탕 <span class="tag warn">미슐랭</span></span>
+        </div></div>
+        <div class="item"><div class="time">15:00</div><div class="desc">도보 → 와이탄(外滩)</div></div>
+        <div class="item"><div class="time">15:00~<br>16:00</div><div class="desc">와이탄 산책 (해지기 전, 여유)</div></div>
+        <div class="item"><div class="time">16:30</div><div class="desc">지하철/페리 → 루자쭈이(陆家嘴)</div></div>
+        <div class="item"><div class="time">16:30~<br>18:00</div><div class="desc">상하이타워 118층 전망대 <span class="tag warn">사전 온라인 예매 필요</span></div></div>
+        <div class="item"><div class="time">18:30</div><div class="desc">와이탄 방향 복귀</div></div>
+        <div class="item"><div class="time">19:00~<br>20:30</div><div class="desc">🍽️ 저녁 (와이탄 인근 · 후보 검토 중) + 푸동 야경 감상
+          <span class="optline"><span class="opt">1안</span> <a href="#rest-henjiu" class="food-link" data-target="rest-henjiu">헌지우이치엔(很久以前)</a> 양꼬치</span>
+          <span class="optline"><span class="opt">2안</span> <a href="#rest-hongkuijia" class="food-link" data-target="rest-hongkuijia">홍쿠이지아(红盔甲)</a> 마라롱샤</span>
+        </div></div>
+        <div class="item"><div class="time">21:00</div><div class="desc">호텔 복귀</div></div>
+      </div>
+      <div class="note">
+        <b>상하이타워 전망대</b> — 운영 08:30~22:00(입장마감 21:30), 티켓 약 3만5천원~/인. KKday·Klook·마이리얼트립 등에서 최소 1~2일 전 온라인 예매 권장, 여권 지참 필수. 일몰 전후 혼잡 예상.<br><br>
+        예원 → 난징동루 → 와이탄 → 루자쭈이는 모두 도보/1~2정거장 거리로 동선이 가장 효율적인 구간입니다.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🗺️ 동선 지도</h2>
+      <div class="map-embed-wrap">
+        <h3>고덕지도(Amap) · 현지에서 사용</h3>
+        <div class="map-frame-outer">
+          <div class="amap-box" id="amap-day4" data-places="上海虹桥万丽酒店|豫园|南京东路|外滩|上海中心大厦">
+            <div class="amap-fallback">고덕지도 API 키가 아직 설정되지 않았습니다.</div>
+          </div>
+          <button type="button" class="map-click-catch" data-modal-title="Day4 · 고덕지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+      <div class="map-embed-wrap">
+        <h3>구글지도 · 사전 계획용 (중국 현지에서는 VPN 필요)</h3>
+        <div class="map-frame-outer">
+          <iframe class="gmap-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?saddr=上海市长宁区虹桥路2270号&daddr=豫园+to:南京东路+to:外滩+to:上海市浦东新区陆家嘴银城中路501号+to:上海市长宁区虹桥路2270号&output=embed"></iframe>
+          <button type="button" class="map-click-catch" data-modal-title="Day4 · 구글지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📍 주소록</h2>
+      <div class="table-scroll">
+        <table class="local-table">
+          <thead><tr><th>장소명</th><th>비고</th><th>고덕</th><th>구글</th><th>디디</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="name-cell">예원<br><span class="cn-copy" data-cn-name="豫园" data-cn-addr="上海市黄浦区福佑路168号">豫园</span></td>
+              <td class="note-cell">오전 관람 추천, 비교적 한산</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=豫园&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=豫园,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="豫园">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">난징동루<br><span class="cn-copy" data-cn-name="南京东路">南京东路</span></td>
+              <td class="note-cell">쇼핑거리, 간식·산책</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=南京东路&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=南京东路,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="南京东路">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">와이탄<br><span class="cn-copy" data-cn-name="外滩">外滩</span></td>
+              <td class="note-cell">강변 산책, 일몰 전후 추천</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=外滩&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=外滩,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="外滩">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">루자쭈이 · 상하이타워 전망대<br><span class="cn-copy" data-cn-name="上海中心大厦" data-cn-addr="上海市浦东新区陆家嘴银城中路501号">上海中心大厦</span></td>
+              <td class="note-cell">118층 전망대, 사전 온라인 예매 필요</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=上海中心大厦&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=上海中心大厦,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="上海中心大厦">🚕</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="banner" style="margin-top:4px;">🍽️ Day4 추천 식당</div>
+
+    <div class="card" id="rest-jiajia">
+      <h2>🥟 佳家汤包 (지아지아탕바오) · 리위안루점</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="佳家汤包">지아지아탕바오 (佳家汤包)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 4 · 10/18(일) 점심</div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">예원 인근 (리위안루)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">게살 샤오롱바오(蟹粉小笼包) · 게살탕바오</div></div>
+      <div class="kv"><div class="k">예약</div><div class="v"><span class="tag ok">불필요</span> 남상만두점 대비 대기 상대적으로 짧음</div></div>
+      <div class="ref">📖 참고: <a href="https://m.cafe.daum.net/subdued20club/LxCT/333705?svc=daumapp" target="_blank" rel="noopener">충동적으로 당일 예약해서 떠난 상하이 여행 3, 4일차 (다음카페)</a></div>
+    </div>
+
+    <div class="card" id="rest-xiaoyang">
+      <h2>🥟 小杨生煎 (샤오양셩지엔)</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="小杨生煎">샤오양셩지엔 (小杨生煎)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 4 · 10/18(일) 오후 간식</div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">난징동루(南京东路) 일대</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">셩지엔바오(生煎) — 고기/새우/게살 등</div></div>
+      <div class="kv"><div class="k">팁</div><div class="v">육즙이 뜨거우니 젓가락으로 찢어 식힌 후 섭취</div></div>
+      <div class="ref">📖 참고: <a href="https://bbs.ruliweb.com/hobby/board/300117/read/30700648" target="_blank" rel="noopener">상하이식 찌고 구운 만두 성젠바오 배달표 vs 시장표 (루리웹)</a></div>
+    </div>
+
+    <div class="card" id="rest-yuxingji">
+      <h2>🦀 위싱지 (裕兴记)</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="裕兴记">위싱지 (裕兴记)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 4 · 10/18(일) 점심 <span class="tag warn">3안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">상하이 시내 다수 지점 (인민광장점 등) — 인민광장/난징둥루역 인근</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">게살국수(蟹粉面) · 샤오롱바오</div></div>
+      <div class="kv"><div class="k">참고</div><div class="v">인민광장점 게살국수 약 88위안, 09:00~22:00</div></div>
+      <div class="ref">📖 참고: <a href="https://www.keyzard.cc/gyals0314/nb/223901222500" target="_blank" rel="noopener">상하이 자유여행 현지인 맛집 게살국수 위싱지(裕兴记) 솔직 후기</a></div>
+    </div>
+
+    <div class="card" id="rest-henjiu">
+      <h2>🍢 헌지우이치엔 (很久以前)</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="很久以前">헌지우이치엔 (很久以前)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 4 · 10/18(일) 저녁 <span class="tag warn">1안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">상하이 제일백화점점 등 (인민광장 인근)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">양꼬치 전문 체인</div></div>
+      <div class="kv"><div class="k">참고</div><div class="v">한국어 메뉴/직원 있는 지점 다수, 한국인 방문객 많음</div></div>
+      <div class="ref">📖 참고: <a href="https://www.myrealtrip.com/community/posts/61943" target="_blank" rel="noopener">상하이 양꼬치 맛집 - 옛날옛적에(헌지우이치엔) (마이리얼트립)</a></div>
+    </div>
+
+    <div class="card" id="rest-lailai">
+      <h2>🥟 라이라이샤오롱 (莱莱小笼) <span class="tag warn">미슐랭</span></h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="莱莱小笼">라이라이샤오롱 (莱莱小笼)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 4 · 10/18(일) 오후 간식 <span class="tag warn">3안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">난징동루(南京东路) 일대</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">딤섬(샤오롱바오) · 완탕</div></div>
+      <div class="kv"><div class="k">참고</div><div class="v">매장이 넓고 회전율이 좋아 대기가 상대적으로 빠른 편</div></div>
+      <div class="ref">📖 참고: <a href="https://polle.com/skykid95/posts/1490" target="_blank" rel="noopener">[莱莱小笼] 라이라이샤오롱 방문 리뷰 (Polle)</a></div>
+    </div>
+
+    <div class="card" id="rest-hongkuijia">
+      <h2>🦞 홍쿠이지아 (红盔甲)</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="红盔甲">홍쿠이지아 (红盔甲)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 4 · 10/18(일) 저녁 <span class="tag warn">2안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">인민광장점 — 上海市黄浦区金陵东路500号 야룽 국제광장 2층</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">마라롱샤(麻辣小龙虾) · 마늘 마라롱샤</div></div>
+      <div class="kv"><div class="k">참고</div><div class="v">직원이 껍질을 까주는 서비스 제공, 점심~야식 시간대 영업</div></div>
+      <div class="ref">📖 참고: <a href="https://keyzard.cc/views/nb/OCgxMCg6MzNlZW1ta2xoZ2trbmZsbA" target="_blank" rel="noopener">상해 맛집 - 홍쿠이지아 마라롱샤 후기</a></div>
+    </div>
+
+    <div class="card" id="rest-dahuchun">
+      <h2>🥟 대호춘 (大壶春) <span class="tag warn">미슐랭</span></h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="大壶春">대호춘 (大壶春)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 4 · 10/18(일) 오후 간식 <span class="tag warn">2안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">난징동루 도보 10분 내 지점 등 (상하이 3대 만두 맛집)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">셩지엔바오(만두 하단 바삭하게 튀김) · 완탕(훈툰)</div></div>
+      <div class="kv"><div class="k">참고</div><div class="v">두툼한 만두피 + 바삭한 밑면이 특징, 저렴한 가격</div></div>
+      <div class="ref">📖 참고: <a href="https://kr.trip.com/moments/detail/shanghai-2-140848654/" target="_blank" rel="noopener">바삭하고 촉촉한 상하이의 아침, 대호춘 성젠바오 (트립닷컴)</a></div>
+    </div>
+
+    <div class="card" id="rest-nanxiang">
+      <h2>🥟 남상만두 (南翔馒头店) · 예원점</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="南翔馒头店">남상만두 (南翔馒头店)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 4 · 10/18(일) 점심 <span class="tag warn">2안 후보</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">예원(豫园) 상업구역 내</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">빨대만두(탕바오, 빨대로 육즙을 마시는 대형 만두) · 샤오롱바오</div></div>
+      <div class="kv"><div class="k">참고</div><div class="v">운영 08:30~21:00, 1층 포장·2~3층 좌식, 대기 긴 편</div></div>
+      <div class="ref">📖 참고: <a href="https://m.ruliweb.com/hobby/board/300117/read/30685235" target="_blank" rel="noopener">대륙의 육즙 가득한 왕만두... 반전있음 (루리웹)</a></div>
+    </div>
+  </section>
+
+  <!-- DAY 5 -->
+  <section class="panel" id="panel-day5">
+    <div class="day-head">
+      <div class="d-title">Day 5 · 10/19(월)</div>
+      <div class="d-sub">프랑스조계지(우캉맨션·안푸루) → 스타벅스 로스터리 → 1000 Trees → 출국</div>
+    </div>
+    <div class="day-card">
+      <div class="timeline">
+        <div class="item"><div class="time">08:00~<br>09:00</div><div class="desc">호텔 테니스 코트 이용</div></div>
+        <div class="item"><div class="time">09:30</div><div class="desc">🍽️ 조식, 짐 정리 (체크아웃 12:00, 수하물 호텔 보관 요청)</div></div>
+        <div class="item"><div class="time">10:00</div><div class="desc">프랑스조계지 이동 <span class="tag ok">택시 약 20~25분</span></div></div>
+        <div class="item"><div class="time">10:30~<br>12:00</div><div class="desc">우캉따샤(우캉맨션) 촬영 스팟 + 우캉루~안푸루 산책 (오전 채광 좋음)</div></div>
+        <div class="item"><div class="time">12:00~<br>13:00</div><div class="desc">🍽️ <a href="#rest-anfulu" class="food-link" data-target="rest-anfulu">안푸루 브런치 카페</a> (egg / Siso Coffee / Undefine 등) <span class="tag ok">예약불필요</span></div></div>
+        <div class="item"><div class="time">13:00</div><div class="desc">스타벅스 리저브 로스터리 이동 <span class="tag ok">택시 약 10~15분</span></div></div>
+        <div class="item"><div class="time">13:15~<br>14:15</div><div class="desc">☕ <a href="#rest-roastery" class="food-link" data-target="rest-roastery">스타벅스 리저브 로스터리</a>(星巴克臻选上海烘焙工坊) — 로스팅 시설 구경, 커피·디저트 <span class="tag ok">예약불필요</span></div></div>
+        <div class="item"><div class="time">14:15</div><div class="desc">1000 Trees(톈안첸수) 이동 <span class="tag ok">택시 약 10~15분</span></div></div>
+        <div class="item"><div class="time">14:30~<br>15:30</div><div class="desc">1000 Trees(天安千树) — 나무 기둥·계단식 테라스 관람, 쑤저우강변에서 외관 촬영 <span class="tag ok">무료·예약불필요</span></div></div>
+        <div class="item"><div class="time">15:30</div><div class="desc">호텔 복귀 <span class="tag ok">택시 약 25~35분</span> <span class="tag warn">늦어도 15:30 출발</span></div></div>
+        <div class="item"><div class="time">16:05</div><div class="desc">호텔 도착, 짐 수령</div></div>
+        <div class="item"><div class="time">16:30</div><div class="desc">공항 이동 <span class="tag ok">호텔 인근, 10~15분</span></div></div>
+        <div class="item"><div class="time">17:00</div><div class="desc">공항 도착, 출국 수속</div></div>
+        <div class="item"><div class="time">19:25</div><div class="desc">김포행 KE2058 출발</div></div>
+      </div>
+      <div class="note">
+        <b>1000 Trees (天安千树)</b> — 上海市普陀区莫干山路600号. 쇼핑몰 내부 10:00~22:00, 외부 테라스·강변은 상시 개방, 입장 무료. 녹지와 테라스는 낮에 봐야 제대로 보여 오후로 배치했으며, 월요일 평일 오후라 비교적 한산합니다.<br><br>
+        <b>스타벅스 리저브 로스터리 (星巴克臻选上海烘焙工坊)</b> — 上海市静安区南京西路789号 兴业太古汇. 안푸루와 1000 Trees 사이에 있어 동선 손실이 거의 없고, 주말·저녁보다 평일 낮이 덜 붐빕니다. 영업시간은 출국 전 재확인하세요.<br><br>
+        ⚠️ 로스터리 추가로 호텔 도착이 16:05경이 되어 16:30 공항 출발까지 여유가 적습니다. 시간이 밀리면 1000 Trees 관람을 줄이고 M50 예술구 산책은 생략하세요.<br><br>
+        동선: 안푸루 → 로스터리(난징시루) → 1000 Trees(북쪽) → 호텔(서쪽)로 되돌아가는 구간이 거의 없습니다. 4인이라 택시(DiDi) 1대로 이동을 권장합니다(지하철은 13호선 江宁路역 1번 출구에서 도보 5~10분). 퇴근 정체(17시~) 전에 호텔로 돌아옵니다. M50 갤러리는 월요일에 쉬는 곳이 많을 수 있고, 비가 오면 1000 Trees 대신 안푸루에 더 머무는 것을 대안으로 두세요.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🗺️ 동선 지도</h2>
+      <div class="map-embed-wrap">
+        <h3>고덕지도(Amap) · 현지에서 사용</h3>
+        <div class="map-frame-outer">
+          <div class="amap-box" id="amap-day5" data-places="上海虹桥万丽酒店|武康大楼|安福路|星巴克臻选上海烘焙工坊|天安千树|上海虹桥国际机场">
+            <div class="amap-fallback">고덕지도 API 키가 아직 설정되지 않았습니다.</div>
+          </div>
+          <button type="button" class="map-click-catch" data-modal-title="Day5 · 고덕지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+      <div class="map-embed-wrap">
+        <h3>구글지도 · 사전 계획용 (중국 현지에서는 VPN 필요)</h3>
+        <div class="map-frame-outer">
+          <iframe class="gmap-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?saddr=上海市长宁区虹桥路2270号&daddr=武康大楼+to:安福路+to:上海市静安区南京西路789号+to:天安千树+to:上海市长宁区虹桥路2270号+to:上海虹桥国际机场&output=embed"></iframe>
+          <button type="button" class="map-click-catch" data-modal-title="Day5 · 구글지도"><span class="zoom-hint">🔍 확대</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📍 주소록</h2>
+      <div class="table-scroll">
+        <table class="local-table">
+          <thead><tr><th>장소명</th><th>비고</th><th>고덕</th><th>구글</th><th>디디</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="name-cell">우캉따샤 (우캉맨션)<br><span class="cn-copy" data-cn-name="武康大楼" data-cn-addr="上海市徐汇区淮海中路1842-1858号">武康大楼</span></td>
+              <td class="note-cell">촬영 스팟, 오전 채광 좋음</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=武康大楼&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=武康大楼,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="武康大楼">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">안푸루<br><span class="cn-copy" data-cn-name="安福路">安福路</span></td>
+              <td class="note-cell">브런치 카페 거리</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=安福路&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=安福路,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="安福路">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">스타벅스 리저브 로스터리<br><span class="cn-copy" data-cn-name="星巴克臻选上海烘焙工坊" data-cn-addr="上海市静安区南京西路789号兴业太古汇">星巴克臻选上海烘焙工坊</span></td>
+              <td class="note-cell">커피·디저트, 평일 낮 비교적 한산 · 지하철 2·12·13호선 南京西路역</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=星巴克臻选上海烘焙工坊&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=星巴克臻选上海烘焙工坊,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="星巴克臻选上海烘焙工坊">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">1000 Trees (톈안첸수)<br><span class="cn-copy" data-cn-name="天安千树" data-cn-addr="上海市普陀区莫干山路600号">天安千树</span></td>
+              <td class="note-cell">10:00~22:00(외부 상시), 무료 · 지하철 13호선 江宁路역 1번 출구</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=天安千树&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=天安千树,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="天安千树">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">호텔<br><span class="cn-copy" data-cn-name="上海虹桥万丽酒店" data-cn-addr="上海市长宁区虹桥路2270号">上海虹桥万丽酒店</span></td>
+              <td class="note-cell">짐 수령 후 공항 이동</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=上海虹桥万丽酒店&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=上海虹桥万丽酒店,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="上海虹桥万丽酒店">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">홍차오공항<br><span class="cn-copy" data-cn-name="上海虹桥国际机场">上海虹桥国际机场</span></td>
+              <td class="note-cell">귀국 출발 (KE2058, 19:25)</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=上海虹桥国际机场&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=上海虹桥国际机场,上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="上海虹桥国际机场">🚕</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="banner" style="margin-top:4px;">🍽️ Day5 추천 식당</div>
+
+    <div class="card" id="rest-anfulu">
+      <h2>☕ 안푸루 브런치 카페</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="安福路">안푸루 (安福路)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 5 · 10/19(월) 브런치</div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">안푸루(安福路) 일대 — egg / Siso Coffee / Undefine 등</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">브런치, 커피, 갈레트/샌드위치</div></div>
+      <div class="kv"><div class="k">예약</div><div class="v"><span class="tag ok">불필요</span> 캐주얼 카페, 워크인 이용</div></div>
+      <div class="ref">📖 참고: <a href="https://linatraveler.com/41" target="_blank" rel="noopener">상하이 여행, 뻔한 명소 대신 채워줄 숨겨진 핫플 4곳 (방랑하는 리나)</a></div>
+    </div>
+
+    <div class="card" id="rest-roastery">
+      <h2>☕ 스타벅스 리저브 로스터리 상하이</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="星巴克臻选上海烘焙工坊">스타벅스 리저브 로스터리 (星巴克臻选上海烘焙工坊)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 5 · 10/19(월) 13:15~14:15</div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">静安区 南京西路789号 兴业太古汇 (난징시루, 안푸루↔1000 Trees 사이)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">리저브 스페셜티 커피, Princi 베이커리 빵·디저트, 로스터리 한정 굿즈</div></div>
+      <div class="kv"><div class="k">예약</div><div class="v"><span class="tag ok">불필요</span> 워크인 · 주말/저녁 혼잡, 평일 낮 권장</div></div>
+      <div class="kv"><div class="k">영업시간</div><div class="v"><span class="tag todo">출국 전 확인</span></div></div>
+    </div>
+  </section>
+
+  <!-- PREP -->
+  <section class="panel" id="panel-prep">
+    <div class="banner">
+      🧳 출국 전 한국에서 미리 준비해두면 현지에서 훨씬 편합니다. 최소 출국 1~2주 전에는 마쳐두세요.
+    </div>
+
+    <div class="card">
+      <h2>① 무비자 입국 요건 확인</h2>
+      <p class="app-desc">한국인은 관광 목적 최대 30일 무비자 입국 가능 (2026.12.31까지 연장 적용, 일반 전자여권 소지자 대상).</p>
+      <ol class="steps">
+        <li>여권 유효기간 6개월 이상 남아있는지 확인</li>
+        <li>왕복 항공권(전자항공권) 및 호텔 예약확인서 PDF/캡처 저장 — 입국심사 시 요구될 수 있음</li>
+        <li>입국 목적은 "관광"으로만 소명, 취업·취재 등 다른 활동은 별도 비자 필요</li>
+        <li>숙박 등록(주숙등기)은 호텔 체크인 시 자동 처리됨</li>
+      </ol>
+      <div class="ref">📖 참고: <a href="https://www.tripstore.kr/blog/%EC%A4%91%EA%B5%AD-%EC%97%AC%ED%96%89-%EB%B9%84%EC%9E%90-%EB%A9%B4%EC%A0%9C-%EC%A4%80%EB%B9%84%EB%AC%BC" target="_blank" rel="noopener">2026 중국 여행 비자 면제! 30일 무비자 입국 준비물 (트립스토어)</a></div>
+    </div>
+
+    <div class="card">
+      <h2>② 온라인 입국카드 사전 작성</h2>
+      <p class="app-desc">2025년 11월 20일부터 중국 입국카드가 온라인/모바일 사전 작성으로 전환되었습니다. 종이 신고서 없이 QR코드로 대체됩니다.</p>
+      <ol class="steps">
+        <li>중국 정부서비스 플랫폼(국가이민관리국 온라인 신고 사이트)에 접속</li>
+        <li>영어 또는 중국어로 제공되므로, 크롬 브라우저의 자동번역 기능으로 한국어 확인 가능</li>
+        <li>여권정보·항공편·숙소 정보(호텔명, 주소) 입력 — 가족 동반 시 대표자가 인원별로 각각 입력 가능</li>
+        <li>제출 후 생성되는 QR코드를 화면 캡처 또는 저장 (입국 시 제시)</li>
+        <li>⚠️ 공항마다 양식이 다를 수 있어, 반드시 <b>홍차오공항용</b> 신고서인지 확인</li>
+      </ol>
+      <div class="ref">📖 참고: <a href="https://yomolabs.kr/china-mobile-entry-form-guide" target="_blank" rel="noopener">2025 중국 온라인 입국신고서 작성법 및 운영 공항 총정리 (요모매거진)</a></div>
+    </div>
+
+    <div class="card">
+      <h2>③ 알리페이(Alipay) 설치 & 카드 등록</h2>
+      <p class="app-desc">중국 전역 QR결제의 사실상 표준. 해외 발급 카드를 그대로 등록해 충전 없이 결제 가능합니다.</p>
+      <ol class="steps">
+        <li>App Store / Google Play에서 "Alipay" 검색 후 설치</li>
+        <li>휴대폰 번호(한국 번호 가능)로 회원가입</li>
+        <li>내정보(Me) → Bank Cards → 카드번호·유효기간·CVC 입력 (VISA/Mastercard/JCB/AMEX 등 대부분 가능)</li>
+        <li>본인 인증(여권 정보 등) 완료 후 등록 — "Tour Pass"에 카드를 연동하면 충전 없이 바로 결제 가능</li>
+      </ol>
+      <div class="ref">📖 참고: <a href="https://brunch.co.kr/@3b552d00287c420/40" target="_blank" rel="noopener">알리페이 카드등록 방법·오류·안됨·트래블월렛·로그·여권 (브런치)</a></div>
+    </div>
+
+    <div class="card">
+      <h2>④ 위챗페이(WeChat Pay) 설치 & 카드 등록</h2>
+      <p class="app-desc">알리페이와 함께 양대 결제수단. 일부 로컬 식당·노점은 위챗페이만 받는 경우도 있어 함께 준비 권장.</p>
+      <ol class="steps">
+        <li>App Store / Google Play에서 "WeChat" 검색 후 설치</li>
+        <li>등록 → 모바일로 등록 → 이름/지역(South Korea)/한국 휴대폰 번호 입력 후 비밀번호 설정</li>
+        <li>나(Me) → 결제 및 서비스 → 지갑 → 은행카드 추가(Add a Bank Card)</li>
+        <li>해외 발급 카드(Visa·Mastercard·JCB·Amex 등) 등록 가능. 실명인증 단계에서 안면인식이나 서류 제출을 요구할 수 있음</li>
+      </ol>
+      <div class="ref">📖 참고: <a href="https://health.solbangwulwebsite.com/entry/%EC%9C%84%EC%B1%97%ED%8E%98%EC%9D%B4-%EA%B0%80%EC%9E%85%EB%B6%80%ED%84%B0-%EC%84%A4%EC%A0%95%EA%B9%8C%EC%A7%80-%E2%80%93-%ED%95%9C%EA%B5%AD%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B2%95-2025-%EC%B5%9C%EC%8B%A0-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8" target="_blank" rel="noopener">[2025 최신] 위챗페이 가입·설정·인증 완전정복</a></div>
+    </div>
+
+    <div class="card">
+      <h2>⑤ 고덕지도(高德地图 / Amap) 설치</h2>
+      <p class="app-desc">중국에서 구글맵이 정상 작동하지 않으므로 필수. 길찾기·택시 호출까지 한 앱에서 가능.</p>
+      <ol class="steps">
+        <li>App Store / Google Play에서 "Amap" 또는 "고덕지도" 검색 후 설치</li>
+        <li>설치 후 위치 권한 허용하면 회원가입 없이도 기본 검색·즐겨찾기 등록 가능</li>
+        <li>설정에서 언어를 한국어 또는 영어로 변경 (기본은 중국어)</li>
+        <li>주요 목적지(호텔, 테니스장 등)를 미리 즐겨찾기에 저장해두면 현지에서 편리</li>
+      </ol>
+      <div class="ref">📖 참고: <a href="https://pickitsmart.com/amap-global-signup-download/" target="_blank" rel="noopener">고덕지도 가입 방법, 다운로드부터 설치 및 오류까지 정리</a></div>
+    </div>
+
+    <div class="card">
+      <h2>⑥ (선택) 디디추싱(滴滴出行/DiDi) 사전 가입</h2>
+      <p class="app-desc">중국판 우버. 미리 가입해두면 현지에서 바로 택시 호출 가능.</p>
+      <ol class="steps">
+        <li>App Store / Google Play에서 "DiDi" 검색 후 설치 (위챗/알리페이 내 미니앱으로도 이용 가능)</li>
+        <li>국제전화번호(+82, 한국 번호)로 인증 가입</li>
+        <li>설정(设置) → 언어를 영어로 변경</li>
+        <li>결제수단으로 알리페이/위챗페이 또는 해외카드 연결</li>
+      </ol>
+      <div class="ref">📖 참고: <a href="https://lulu.myheeya.com/775" target="_blank" rel="noopener">중국 택시 어플 디디 사용법 총정리 (라이프밸런스)</a></div>
+    </div>
+
+    <div class="card">
+      <h2>기타 준비물</h2>
+      <ol class="steps">
+        <li>데이터 로밍 또는 중국용 유심/이심(eSIM) 준비 — 도착 직후 인터넷 연결 필요</li>
+        <li>보조배터리, 멀티어댑터(중국은 한국과 콘센트 모양 다를 수 있음)</li>
+        <li>여권 사본(사진) 별도 보관</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section class="panel" id="panel-tips">
+    <div class="card">
+      <h2>💳 알리페이(Alipay) 사용법</h2>
+      <ol class="steps">
+        <li>매장 결제: 앱 홈 화면의 "Pay(付款)" 버튼 → 표시되는 바코드/QR코드를 점원이 스캔 (또는 매장 QR코드를 직접 스캔하는 방식도 있음)</li>
+        <li>연동해둔 해외카드로 자동 결제, 별도 충전 불필요 (Tour Pass 연동 시)</li>
+        <li>택시·공유자전거 등도 알리페이 내 미니 프로그램으로 이용 가능</li>
+        <li>결제 전 화면 상단 결제금액(위안화)을 반드시 확인</li>
+      </ol>
+      <div class="ref">📖 참고: <a href="https://www.exelient.co.kr/project/how-to-use-alipay/" target="_blank" rel="noopener">중국 필수 앱 – 알리페이 사용법 총정리 (EXELIENT)</a></div>
+    </div>
+
+    <div class="card">
+      <h2>🚕 디디추싱(DiDi) 사용법</h2>
+      <ol class="steps">
+        <li>앱 실행 → 출발지/도착지 입력 (고덕지도 주소를 복사해서 붙여넣으면 편리)</li>
+        <li>차량 등급 선택(이코노미 등) → 예상 요금 확인 후 호출</li>
+        <li>결제는 알리페이/위챗페이 또는 등록한 해외카드로 자동 결제</li>
+        <li>기사님이 위치 확인차 전화할 수 있어, 한국 번호(+82) 국제전화 수신이 가능하도록 로밍/데이터 설정 필요</li>
+        <li>상하이 기본요금은 약 16위안부터 시작</li>
+      </ol>
+      <div class="ref">📖 참고: <a href="https://speakable.co.kr/blog/chinese-didi-taxi-guide" target="_blank" rel="noopener">디디추싱 사용법: 중국 택시 앱 호출부터 기사 전화 대응까지 (Speakable)</a></div>
+    </div>
+
+    <div class="card">
+      <h2>🗺️ 고덕지도(Amap) 사용법</h2>
+      <ol class="steps">
+        <li>목적지 검색(한글 지원) → 도보/대중교통/택시 경로와 소요시간 확인</li>
+        <li>지하철 경로 안내 시 정확한 호선·환승·출구 번호까지 안내됨</li>
+        <li>앱 내에서 바로 택시(디디 등)를 호출하는 기능도 있어 앱 두 개를 오갈 필요가 적음</li>
+        <li>즐겨찾기에 저장해둔 장소(호텔, 테니스장 등)를 바로 목적지로 선택 가능</li>
+      </ol>
+      <div class="ref">📖 참고: <a href="https://install.dailyethe.com/%EA%B3%A0%EB%8D%95%EC%A7%80%EB%8F%84-%EC%96%B4%ED%94%8C/" target="_blank" rel="noopener">고덕지도 어플 다운로드 | 사용법 | 한글 | 영어 총정리</a></div>
+    </div>
+
+    <div class="card">
+      <h2>📶 통신 · 인터넷 팁</h2>
+      <div class="note">
+        중국 본토에서는 구글(지도·검색·지메일), 인스타그램, 페이스북 등이 차단되어 있어 <b>VPN 없이는 접속 불가</b>합니다.<br><br>
+        <b>카카오톡</b>은 원래 차단 대상이었으나, 2025년 11월부터 베이징·상하이 등 일부 도시에서 VPN 없이도 간헐적으로 접속되는 사례가 보고되고 있습니다. 다만 공식 발표 없이 <b>불안정한 상태</b>이므로, 카카오톡으로 연락을 주고받아야 한다면 데이터 로밍/유심과 함께 VPN 앱을 백업으로 준비하는 것이 안전합니다.<br><br>
+        본 일정표는 인터넷 연결 없이도 열람 가능한 오프라인 파일이므로, 출국 전 미리 다운로드해두면 현지에서 네트워크 상태와 무관하게 확인할 수 있습니다.
+      </div>
+      <div class="ref">📖 참고: <a href="https://platum.kr/archives/274033" target="_blank" rel="noopener">중국 주요 도시서 카카오톡 차단 해제…정상회담 후 변화 포착 (플래텀)</a></div>
+    </div>
+
+    <div class="card">
+      <h2>💵 기타 팁</h2>
+      <ol class="steps">
+        <li>모바일 결제가 기본이지만, 만약을 대비해 소액 현금(위안화)도 약간 소지 권장</li>
+        <li>전통시장·일부 노점은 현금만 받는 경우가 있음</li>
+        <li>택시는 디디추싱 호출이 일반 승차보다 편리하고 바가지 위험이 적음</li>
+        <li>대부분의 관광지·식당에서 QR 메뉴/주문(스캔 후 직접 주문)이 보편화되어 있음</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    상하이 여행 일정 초안 · 2026.09.13 작성<br>
+    최신 내용은 프로젝트의 Claude.md / 일정표.md 참고
+  </footer>
+
+</main>
+
+<button type="button" id="toTopBtn" class="to-top-btn" aria-label="맨 위로">↑</button>
+
+<div class="cn-modal" id="cnModal" aria-hidden="true">
+  <div class="cn-modal-actions">
+    <button type="button" class="cn-modal-btn" id="cnCopyBtn">📋 복사</button>
+    <button type="button" class="cn-modal-btn cn-modal-close" id="cnCloseBtn" aria-label="닫기">✕</button>
+  </div>
+  <div class="cn-modal-body">
+    <div class="cn-modal-text" id="cnModalText"></div>
+    <div class="cn-modal-sub" id="cnModalSub"></div>
+  </div>
+  <div class="cn-copy-toast" id="cnCopyToast">복사되었습니다</div>
+</div>
+
+<div class="map-modal" id="mapModal" aria-hidden="true">
+  <div class="map-modal-bar">
+    <span class="map-modal-title" id="mapModalTitle">지도</span>
+    <button type="button" class="map-modal-close" id="mapModalClose" aria-label="닫기">✕</button>
+  </div>
+  <div class="map-modal-body" id="mapModalBody"></div>
+</div>
+
+<script>
+  // ===== 고덕지도(Amap) API 설정 =====
+  // open.amap.com(lbs.amap.com)에서 발급받은 "Web端(JS API)" Key와 보안키(jscode)를 아래에 입력하세요.
+  // 둘 다 비어있으면 각 날짜 페이지에는 "API 키 미설정" 안내만 표시되고 지도는 로드되지 않습니다.
+  var AMAP_CONFIG = {
+    key: '',            // 예: '1234567890abcdef1234567890abcdef'
+    securityCode: ''    // 예: 'abcdef1234567890abcdef1234567890'
+  };
+
+  var amapSdkState = 'idle'; // idle | loading | ready
+  var amapSdkCallbacks = [];
+  var amapInitedIds = {};
+
+  function loadAmapSDK(cb){
+    if(amapSdkState === 'ready'){ cb(); return; }
+    amapSdkCallbacks.push(cb);
+    if(amapSdkState === 'loading'){ return; }
+    amapSdkState = 'loading';
+    window._AMapSecurityConfig = { securityJsCode: AMAP_CONFIG.securityCode };
+    var s = document.createElement('script');
+    s.src = 'https://webapi.amap.com/maps?v=2.0&key=' + encodeURIComponent(AMAP_CONFIG.key);
+    s.onload = function(){
+      amapSdkState = 'ready';
+      amapSdkCallbacks.forEach(function(f){ f(); });
+      amapSdkCallbacks = [];
+    };
+    s.onerror = function(){
+      amapSdkState = 'idle';
+    };
+    document.head.appendChild(s);
+  }
+
+  function initAmapBox(container){
+    var id = container.id;
+    if(amapInitedIds[id]) return;
+    amapInitedIds[id] = true;
+    var placesRaw = container.getAttribute('data-places');
+    if(!placesRaw) return;
+    var places = placesRaw.split('|');
+    container.innerHTML = '';
+    var map = new AMap.Map(container, { zoom: 12, center: [121.40, 31.20] });
+    container._amapInstance = map;
+    AMap.plugin('AMap.PlaceSearch', function(){
+      var ps = new AMap.PlaceSearch({ city: '上海', pageSize: 1 });
+      var markers = [];
+      var remaining = places.length;
+      places.forEach(function(name, idx){
+        ps.search(name, function(status, result){
+          remaining--;
+          if(status === 'complete' && result.poiList && result.poiList.pois.length){
+            var poi = result.poiList.pois[0];
+            var marker = new AMap.Marker({
+              position: poi.location,
+              map: map,
+              label: { content: '<b>' + (idx + 1) + '</b> ' + name, direction: 'top' }
+            });
+            markers.push(marker);
+          }
+          if(remaining === 0 && markers.length){
+            map.setFitView(markers);
+          }
+        });
+      });
+    });
+  }
+
+  function tryInitAmapForPanel(panelId){
+    if(!AMAP_CONFIG.key || !AMAP_CONFIG.securityCode) return;
+    var panel = document.getElementById(panelId);
+    if(!panel) return;
+    var boxes = panel.querySelectorAll('.amap-box[data-places]');
+    if(!boxes.length) return;
+    loadAmapSDK(function(){
+      boxes.forEach(initAmapBox);
+    });
+  }
+
+  var buttons = document.querySelectorAll('nav.tabbar button');
+
+  function activateTab(tab){
+    buttons.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-tab') === tab); });
+    document.querySelectorAll('.panel').forEach(function(p){
+      p.classList.toggle('active', p.id === 'panel-' + tab);
+    });
+    tryInitAmapForPanel('panel-' + tab);
+  }
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      activateTab(this.getAttribute('data-tab'));
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+
+  // 맨 위로 이동 플로팅 버튼
+  var toTopBtn = document.getElementById('toTopBtn');
+  function toggleToTopBtn(){
+    toTopBtn.classList.toggle('show', window.scrollY > 300);
+  }
+  window.addEventListener('scroll', toggleToTopBtn, {passive:true});
+  toggleToTopBtn();
+  toTopBtn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  document.querySelectorAll('a.food-link').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      var targetId = this.getAttribute('data-target');
+      var target = document.getElementById(targetId);
+      if(!target) return;
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+      target.classList.add('flash');
+      setTimeout(function(){ target.classList.remove('flash'); }, 1600);
+    });
+  });
+
+  // 중국어 표기 확대 보기 모달
+  var cnModal = document.getElementById('cnModal');
+  var cnModalText = document.getElementById('cnModalText');
+  var cnModalSub = document.getElementById('cnModalSub');
+  var cnCopyBtn = document.getElementById('cnCopyBtn');
+  var cnCloseBtn = document.getElementById('cnCloseBtn');
+  var cnCopyToast = document.getElementById('cnCopyToast');
+  var cnToastTimer = null;
+  var cnCurrentCopyText = '';
+
+  function cnFontSize(text){
+    var len = text.length;
+    if(len <= 4) return '17vw';
+    if(len <= 8) return '12vw';
+    if(len <= 14) return '8.5vw';
+    return '6vw';
+  }
+
+  function cnSubFontSize(text){
+    var len = text.length;
+    if(len <= 10) return '6vw';
+    if(len <= 20) return '4.6vw';
+    return '3.8vw';
+  }
+
+  function openCnModal(name, addr){
+    cnModalText.textContent = name;
+    cnModalText.style.fontSize = cnFontSize(name);
+    if(addr){
+      cnModalSub.textContent = addr;
+      cnModalSub.style.fontSize = cnSubFontSize(addr);
+      cnModalSub.classList.add('show');
+      cnCurrentCopyText = name + ', ' + addr;
+    } else {
+      cnModalSub.textContent = '';
+      cnModalSub.classList.remove('show');
+      cnCurrentCopyText = name;
+    }
+    cnModal.classList.add('open');
+    cnModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeCnModal(){
+    cnModal.classList.remove('open');
+    cnModal.setAttribute('aria-hidden', 'true');
+  }
+
+  // 이벤트 위임: 복호화 후 나중에 삽입되는 예약 페이지의 .cn-copy도 동작하도록 함
+  document.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('.cn-copy') : null;
+    if(!el) return;
+    var cnName = el.getAttribute('data-cn-name');
+    if(cnName){
+      openCnModal(cnName, el.getAttribute('data-cn-addr'));
+    } else {
+      openCnModal(el.getAttribute('data-cn') || el.textContent.trim());
+    }
+  });
+
+  cnModal.addEventListener('click', function(e){
+    if(e.target === cnModal){ closeCnModal(); }
+  });
+  cnCloseBtn.addEventListener('click', closeCnModal);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ closeCnModal(); }
+  });
+
+  function showCnToast(msg){
+    cnCopyToast.textContent = msg;
+    cnCopyToast.classList.add('show');
+    clearTimeout(cnToastTimer);
+    cnToastTimer = setTimeout(function(){ cnCopyToast.classList.remove('show'); }, 1400);
+  }
+
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.setAttribute('readonly', '');
+    ta.focus();
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    var ok = false;
+    try{ ok = document.execCommand('copy'); }catch(err){ ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  cnCopyBtn.addEventListener('click', function(){
+    var text = cnCurrentCopyText || cnModalText.textContent;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        showCnToast('복사되었습니다');
+      }).catch(function(){
+        showCnToast(fallbackCopy(text) ? '복사되었습니다' : '복사 실패 — 길게 눌러 복사하세요');
+      });
+    } else {
+      showCnToast(fallbackCopy(text) ? '복사되었습니다' : '복사 실패 — 길게 눌러 복사하세요');
+    }
+  });
+
+  // ===== 디디(알리페이 미니프로그램) 호출 =====
+  // 목적지 자동 입력은 지원되지 않으므로, 중국어 장소명을 복사한 뒤 디디를 열어 붙여넣도록 함
+  var DIDI_ALIPAY_URL = 'https://ds.alipay.com/?scheme=' +
+    encodeURIComponent('alipays://platformapi/startapp?appId=20000778');
+
+  document.querySelectorAll('.maplink.didi').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      var text = el.getAttribute('data-didi');
+      var ok = fallbackCopy(text);
+      if(!ok && navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).catch(function(){});
+        ok = true;
+      }
+      showCnToast(ok ? '📋 ' + text + ' 복사됨 → 디디 여는 중' : '복사 실패 — 현지명칭을 길게 눌러 복사하세요');
+      setTimeout(function(){ window.location.href = DIDI_ALIPAY_URL; }, 500);
+    });
+  });
+
+  // ===== 지도 확대보기 모달 =====
+  var mapModal = document.getElementById('mapModal');
+  var mapModalBody = document.getElementById('mapModalBody');
+  var mapModalTitle = document.getElementById('mapModalTitle');
+  var mapModalClose = document.getElementById('mapModalClose');
+  var mapModalMovedEl = null;
+  var mapModalOriginalParent = null;
+  var mapModalOriginalNext = null;
+
+  function openMapModal(sourceEl, title){
+    mapModalTitle.textContent = title || '지도';
+    mapModalBody.innerHTML = '';
+    if(sourceEl.tagName === 'IFRAME'){
+      var frame = document.createElement('iframe');
+      frame.src = sourceEl.src;
+      frame.loading = 'lazy';
+      frame.referrerPolicy = 'no-referrer-when-downgrade';
+      mapModalBody.appendChild(frame);
+    } else {
+      mapModalOriginalParent = sourceEl.parentNode;
+      mapModalOriginalNext = sourceEl.nextSibling;
+      mapModalMovedEl = sourceEl;
+      mapModalBody.appendChild(sourceEl);
+      if(sourceEl._amapInstance){
+        setTimeout(function(){
+          sourceEl._amapInstance.resize();
+          sourceEl._amapInstance.setFitView();
+        }, 60);
+      }
+    }
+    mapModal.classList.add('open');
+    mapModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMapModal(){
+    if(mapModalMovedEl){
+      if(mapModalOriginalNext){
+        mapModalOriginalParent.insertBefore(mapModalMovedEl, mapModalOriginalNext);
+      } else {
+        mapModalOriginalParent.appendChild(mapModalMovedEl);
+      }
+      if(mapModalMovedEl._amapInstance){
+        setTimeout(function(){ mapModalMovedEl._amapInstance.resize(); }, 60);
+      }
+      mapModalMovedEl = null;
+    }
+    mapModalBody.innerHTML = '';
+    mapModal.classList.remove('open');
+    mapModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.map-click-catch').forEach(function(catcher){
+    catcher.addEventListener('click', function(){
+      var source = this.previousElementSibling;
+      if(!source) return;
+      openMapModal(source, this.getAttribute('data-modal-title'));
+    });
+  });
+
+  mapModalClose.addEventListener('click', closeMapModal);
+  mapModal.addEventListener('click', function(e){
+    if(e.target === mapModal){ closeMapModal(); }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && mapModal.classList.contains('open')){ closeMapModal(); }
+  });
+</script>
+
+
+<script id="encPayload" type="application/json">{"v":1,"iter":600000,"salt":"ZR2jEbGH5xMnkhc2aeU0Zw==","iv":"OYYhuEVkqdcXIJZy","ct":"fddz6Obv5pUcyqEtWg3SRA+UzKsLYUqaZ8B7uQgfFJRH885Ion4x9txXYnBcrd6G6NuqMBDWbPmXrhB9gBJRRclCv+Rfy3TLnYgCOF3KPqYlGIpJRBwCktZlnjoaaCpEW0CgxNN51qPECCLBUZD2aT3b7wDCkYLn6phtDsXsCRf334HHGsV+MSpyyFWqxk1/LEUFxUDLpvrg6uJhNj78L8q+zMNADynj5OC1nn9pHsO+tMg5z+bXk2KjRfy3hEiEf243RoiyVUu4SqeR/vJsCjElYIVwzUHiH4xVXcbOxXVyu1ag/Mbf5Dl6WW2+YRP6UerIXAdJsKSkXu6Rx9TUdoUsezy2Hpi83mI8Bz47rMbDIaHl/SPjdUQeV5WZeZVBs6FE5W5ICkgBYGpFXaAndlsMcPgkGmBICqkkCYZafr2vHh1mUS31k/LylkPWM8Q8BRb//Lm7nf/VydnKJ/PcBGt08JJ6nX7m71qHThvYZ7TTeehAru/9ZhI/ZKGRG31vVpYVZaOIEgpAm/ZVaYe0bY80PxlfgsixRcz64hJN8Kv5lGhSNy9cNen1n+3WxplLG2c9TEmJQwfLTHV3F2Zgn92XLGqJnClVVy3UzJSpNiblQGeTh+0G9qNyj6qxvMebTvwctOdbFAdVknmZq9ndNfqWxbbE57wSIbh8WaS/JwWP92R04QsV7IB/WlzxghrhozkKyiRd20sYFIBDR99n8AIoy3uuzCZAadyvwR8XhKpqlXDGyb+6fmlTtd2yIEFudYzgeKsb6tOq/EfcusAsGBgxGHsXlIlCdvCn4edqSdKF4xyYjvhWCpG9Z7MsqTZwwdUbiw35ZKc+zu9uw9i6y6qr+y/3zUfglcHu0ldkGBx6owmhElf/zfH4tA0Wqpz6AdqQPdn/xniWj3Qe/5oMm/Oa7uJDui/ZoLRD7KMOo/mp4vM8dJ6Dd5kq0dyRB5lGES//SIbHGw2PQDk76vuqza8sS2OhVj9ZJAk7/wvWm75jR71Bjg0KpNRlYl9ywSDTA4qCxaMs64q7kCqt/ZmGfGMtU/W+etM2mqg2OysjiiYl/vBgSTxnkGMjbPjFNyiWmSPtAxwUcfB23oAyW1Uc6ZSxA2UhwP7SHlINGctIciuHVjne18RvgfOH6sjg9mhOreH2EgUT/vX/qP6XsvBiVICPlqe3tyJGB3HNEkezUC3Q4vpvTJzX2OMBHcMEuMw2SDgjMh2QuIBttXOtgNW2tJfuznw/uBoNHPzkkKG5Dp7tVS6tsKr/nySVTXZMh28cV4UlnS0XxqPCnqShqq0cZwsmuSuBGPQuPRNTrP+G942H+060po+S1scicT/GQyPhSwDHO5d0p3MVNRxEVoM4MLacp8zup5Hpew4LI5WNCH2Bn2oTRAKoiHQXAN+RR4nqnaoE6ZVuHdcta3vi93HMPgVHzHMGgxaJvSJAsCIgLBpclUMBTC6AbymaMNOvDJ2ufMP88A+DpNkArrx/VRxhmd+zGwDieVhTH8ivDV62Z9h0CLNN78NbmBOfxm9vWuroVK7fsUUly1ohS/NUaYOyNmxbNClVzKMKuV8zMr8iJ2kucVbetGP+tmZVrAZmLWVjGM7+RQqGiQJaqoJSepLH/n8qm76/bjPliginBCSsLUSf19/g63cykPi2IhdLyjds+hfUWbralmJZnyDRoVphMv31bIVo0tnfBsI+djgrRwpPV4OJtMbxmOCW7KdpD///D1bRMSw1A8GGMOqDFmh056Dh7GIH9SiyMduiPl8qbDhuDlnOKXRI2Bq8eiHOoPMwU/j498iReva0NjubDzG10qtm5b6as+EtKfiWiaN4v7GOKECAx4aIf/O3SyTMSb1RJlitZtVRFGePn0j1GmINERhRAOFIrhKqk/Z7hzEeT1a6NQitHui/ditFeimW9ShYZvi1wF7Hu+dnP2yTJlxStygcp8akf/wkbIP+uXbnP6vr8b5QpXCkPmD1uoQ1Up52ir9+4kIjiDVaEVJr/AbAdiPs+uxpTl1a5Pk2NKuPsLcNXjylZlvPuU4dnPKEs9QioUX2gnaFpy40Z4u05yES4XtlIrLwylwQ4fNuvgOe6nAMpe83n6tYKMZoEf9hzLcSh8I77s1FT6DYAw69rptqVCF/j0X5Vs4mimTpsfzV1ADJ6/mOpDyTAUeT2wwAO905tx4PxdNId40BpEThgKmla6KAlszyUCEiPcWymdh/g9lcb9s144mlW9rsWGm2w5QXWyM76f10LFuGDOOyYCGa+SpuVQ+tPSZpY4VSYSUlRyealXTq96KraQUnuXhUnK7jKOeTzYXYf+IUY+t437oYkF3WtQ8r53zOQ6TSH1DnTJ9HDAiOYrPzsVAjD/WsdYvUQha3EZfM2NkNLykeUSh2e9YAn9muhJxypm7kQdo7pg/XPy1RMbT+BAPGg5ZWhrL3KxWnWSPXN0vvnaFg1+sjGubwf0NeGlKwCxivtR393Rx6cgoKorkvUErhAx3C899bG0CSHNMVPHFdksYnpiAJvx30xHBgv4EFvR75KBvpySrNxWMqLFIDgtwzlLEMmkuHOvWth/xYqOIQ9pzdYaxkrfT6hz+5t+XrvzAajM0etk32hMb+wGoh9FkK8rQInTDy0ohRwlBg59AC6f9/LBOzuXCcX0fFV/V2P/zBgY2G8U9JD3XgP/r/jEpJObmnyW+1sx4VBdkAYZzA99fGRyzD1Cgye64hqe3PjOJRxIF+aX/YG2R8gua4sfeIrOgL71attaK58dgVw+QVzCiImVj1"}</script>
+<script>
+(function(){
+  var P = JSON.parse(document.getElementById('encPayload').textContent);
+  var STORE_KEY = 'tripKey:' + P.salt;
+  var panel = document.getElementById('panel-quick');
+  var form = document.getElementById('lockForm');
+  var input = document.getElementById('lockInput');
+  var remember = document.getElementById('lockRemember');
+  var btn = document.getElementById('lockBtn');
+  var msg = document.getElementById('lockMsg');
+
+  function fromB64(s){ var b = atob(s), a = new Uint8Array(b.length); for(var i=0;i<b.length;i++) a[i]=b.charCodeAt(i); return a; }
+  function toB64(buf){ var a = new Uint8Array(buf), s=''; for(var i=0;i<a.length;i++) s+=String.fromCharCode(a[i]); return btoa(s); }
+  function store(op, v){ try{ if(op==='get') return localStorage.getItem(STORE_KEY); if(op==='set') localStorage.setItem(STORE_KEY, v); if(op==='del') localStorage.removeItem(STORE_KEY); }catch(e){} return null; }
+
+  var subtle = window.crypto && window.crypto.subtle;
+  if(!subtle){
+    msg.textContent = '이 브라우저(또는 파일로 직접 연 경우)에서는 복호화를 지원하지 않습니다. 인터넷 주소(https)로 열어 주세요.';
+    btn.disabled = true; input.disabled = true;
+    return;
+  }
+
+  function deriveRawKey(pw){
+    return subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveBits'])
+      .then(function(base){
+        return subtle.deriveBits({ name:'PBKDF2', salt: fromB64(P.salt), iterations: P.iter, hash:'SHA-256' }, base, 256);
+      });
+  }
+
+  function decryptWith(raw){
+    return subtle.importKey('raw', raw, { name:'AES-GCM' }, false, ['decrypt'])
+      .then(function(key){ return subtle.decrypt({ name:'AES-GCM', iv: fromB64(P.iv) }, key, fromB64(P.ct)); })
+      .then(function(pt){ return new TextDecoder().decode(pt); });
+  }
+
+  function show(html){
+    panel.innerHTML = html + '<button type="button" class="lock-relock" id="relockBtn">🔒 다시 잠그기</button>';
+    document.getElementById('relockBtn').addEventListener('click', function(){
+      store('del'); location.reload();
+    });
+  }
+
+  // 이 기기에 저장된 키가 있으면 자동으로 열기
+  var saved = store('get');
+  if(saved){
+    decryptWith(fromB64(saved)).then(show).catch(function(){ store('del'); });
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var pw = input.value;
+    if(!pw){ msg.textContent = '비밀번호를 입력해 주세요.'; return; }
+    btn.disabled = true; msg.textContent = '확인 중…';
+    var rawKey;
+    deriveRawKey(pw)
+      .then(function(raw){ rawKey = raw; return decryptWith(raw); })
+      .then(function(html){
+        if(remember.checked) store('set', toB64(rawKey));
+        show(html);
+      })
+      .catch(function(){
+        btn.disabled = false;
+        msg.textContent = '비밀번호가 틀렸습니다.';
+        input.select();
+      });
+  });
+})();
+</script>
+</body>
+</html>
