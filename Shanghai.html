@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>상하이 여행 일정 (2026.10.15~19) v2</title>
+<title>상하이 여행('26.10)</title>
 <style>
   :root{
     --bg:#f6f5f2;
@@ -335,6 +335,41 @@
     user-select:all;
     cursor:pointer;
   }
+  .copy-btn{
+    display:inline-block;
+    font-family:inherit;
+    font-size:0.78em;
+    font-weight:600;
+    padding:2px 9px;
+    margin-left:4px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:var(--chip-bg);
+    color:var(--text);
+    cursor:pointer;
+    vertical-align:1px;
+    white-space:nowrap;
+  }
+  .copy-btn:active{opacity:0.7;}
+  .page-toast{
+    position:fixed;
+    left:50%;
+    bottom:calc(80px + env(safe-area-inset-bottom, 0px));
+    transform:translateX(-50%) translateY(10px);
+    max-width:calc(100% - 32px);
+    background:rgba(20,19,22,0.92);
+    color:#fff;
+    padding:9px 18px;
+    border-radius:999px;
+    font-size:0.86em;
+    font-weight:700;
+    text-align:center;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s, transform .2s;
+    z-index:300;
+  }
+  .page-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   .cn-modal{
     position:fixed;
     inset:0;
@@ -617,8 +652,7 @@
 <body>
 
 <header class="top">
-  <h1>🇨🇳 상하이 여행 일정</h1>
-  <p>2026.10.15(목) ~ 10.19(월) · 4박 5일</p>
+  <h1>상하이 여행('26.10)</h1>
 </header>
 
 <nav class="tabbar" id="tabbar">
@@ -681,8 +715,8 @@
             </tr>
             <tr>
               <td class="day-cell">Day5<br>10/19(월)</td>
-              <td class="place-cell">우캉맨션 · 안푸루 · 스타벅스 로스터리 · 1000 Trees</td>
-              <td class="desc-cell">오전 산책·브런치, 오후 로스터리·1000 Trees 후 공항 이동, 귀국</td>
+              <td class="place-cell">우캉맨션 · 안푸루 · 란신(본방요리) · 스타벅스 로스터리 · 1000 Trees</td>
+              <td class="desc-cell">오전 산책, 상하이 본방요리 점심, 오후 로스터리·1000 Trees 후 공항 이동, 귀국</td>
             </tr>
           </tbody>
         </table>
@@ -1155,19 +1189,23 @@
   <section class="panel" id="panel-day5">
     <div class="day-head">
       <div class="d-title">Day 5 · 10/19(월)</div>
-      <div class="d-sub">프랑스조계지(우캉맨션·안푸루) → 스타벅스 로스터리 → 1000 Trees → 출국</div>
+      <div class="d-sub">프랑스조계지(우캉맨션·안푸루) → 란신 점심 → 스타벅스 로스터리 → 1000 Trees → 출국</div>
     </div>
     <div class="day-card">
       <div class="timeline">
         <div class="item"><div class="time">08:00~<br>09:00</div><div class="desc">호텔 테니스 코트 이용</div></div>
         <div class="item"><div class="time">09:30</div><div class="desc">🍽️ 조식, 짐 정리 (체크아웃 12:00, 수하물 호텔 보관 요청)</div></div>
         <div class="item"><div class="time">10:00</div><div class="desc">프랑스조계지 이동 <span class="tag ok">택시 약 20~25분</span></div></div>
-        <div class="item"><div class="time">10:30~<br>12:00</div><div class="desc">우캉따샤(우캉맨션) 촬영 스팟 + 우캉루~안푸루 산책 (오전 채광 좋음)</div></div>
-        <div class="item"><div class="time">12:00~<br>13:00</div><div class="desc">🍽️ <a href="#rest-anfulu" class="food-link" data-target="rest-anfulu">안푸루 브런치 카페</a> (egg / Siso Coffee / Undefine 등) <span class="tag ok">예약불필요</span></div></div>
-        <div class="item"><div class="time">13:00</div><div class="desc">스타벅스 리저브 로스터리 이동 <span class="tag ok">택시 약 10~15분</span></div></div>
-        <div class="item"><div class="time">13:15~<br>14:15</div><div class="desc">☕ <a href="#rest-roastery" class="food-link" data-target="rest-roastery">스타벅스 리저브 로스터리</a>(星巴克臻选上海烘焙工坊) — 로스팅 시설 구경, 커피·디저트 <span class="tag ok">예약불필요</span></div></div>
-        <div class="item"><div class="time">14:15</div><div class="desc">1000 Trees(톈안첸수) 이동 <span class="tag ok">택시 약 10~15분</span></div></div>
-        <div class="item"><div class="time">14:30~<br>15:30</div><div class="desc">1000 Trees(天安千树) — 나무 기둥·계단식 테라스 관람, 쑤저우강변에서 외관 촬영 <span class="tag ok">무료·예약불필요</span></div></div>
+        <div class="item"><div class="time">10:30~<br>11:30</div><div class="desc">우캉따샤(우캉맨션) 촬영 스팟 + 우캉루~안푸루 산책 (오전 채광 좋음)</div></div>
+        <div class="item"><div class="time">11:30</div><div class="desc">란신 이동 <span class="tag ok">택시 약 10~15분</span> <span class="tag warn">점심 피크(12시) 전 도착</span></div></div>
+        <div class="item"><div class="time">11:45~<br>12:45</div><div class="desc">🍽️ 점심 — 상하이 본방요리(本帮菜)
+          <span class="optline"><span class="opt">1안</span> <a href="#rest-lanxin" class="food-link" data-target="rest-lanxin">란신(兰心餐厅) · 진셴루점</a> <span class="tag warn">미슐랭 빕구르망</span> <span class="tag ok">워크인</span></span>
+          <span class="optline"><span class="opt">2안</span> <a href="#rest-guangming" class="food-link" data-target="rest-guangming">광밍춘(光明邨大酒家)</a> <span class="tag muted">란신 대기가 길 때</span></span>
+        </div></div>
+        <div class="item"><div class="time">12:45</div><div class="desc">스타벅스 리저브 로스터리 이동 <span class="tag ok">택시 약 10분</span></div></div>
+        <div class="item"><div class="time">13:00~<br>14:00</div><div class="desc">☕ <a href="#rest-roastery" class="food-link" data-target="rest-roastery">스타벅스 리저브 로스터리</a>(星巴克臻选上海烘焙工坊) — 로스팅 시설 구경, 식후 커피·디저트 <span class="tag ok">예약불필요</span></div></div>
+        <div class="item"><div class="time">14:00</div><div class="desc">1000 Trees(톈안첸수) 이동 <span class="tag ok">택시 약 10~15분</span></div></div>
+        <div class="item"><div class="time">14:15~<br>15:30</div><div class="desc">1000 Trees(天安千树) — 나무 기둥·계단식 테라스 관람, 쑤저우강변에서 외관 촬영 <span class="tag ok">무료·예약불필요</span></div></div>
         <div class="item"><div class="time">15:30</div><div class="desc">호텔 복귀 <span class="tag ok">택시 약 25~35분</span> <span class="tag warn">늦어도 15:30 출발</span></div></div>
         <div class="item"><div class="time">16:05</div><div class="desc">호텔 도착, 짐 수령</div></div>
         <div class="item"><div class="time">16:30</div><div class="desc">공항 이동 <span class="tag ok">호텔 인근, 10~15분</span></div></div>
@@ -1176,9 +1214,9 @@
       </div>
       <div class="note">
         <b>1000 Trees (天安千树)</b> — 上海市普陀区莫干山路600号. 쇼핑몰 내부 10:00~22:00, 외부 테라스·강변은 상시 개방, 입장 무료. 녹지와 테라스는 낮에 봐야 제대로 보여 오후로 배치했으며, 월요일 평일 오후라 비교적 한산합니다.<br><br>
-        <b>스타벅스 리저브 로스터리 (星巴克臻选上海烘焙工坊)</b> — 上海市静安区南京西路789号 兴业太古汇. 안푸루와 1000 Trees 사이에 있어 동선 손실이 거의 없고, 주말·저녁보다 평일 낮이 덜 붐빕니다. 영업시간은 출국 전 재확인하세요.<br><br>
+        <b>스타벅스 리저브 로스터리 (星巴克臻选上海烘焙工坊)</b> — 上海市静安区南京西路789号 兴业太古汇. 란신(진셴루)과 1000 Trees 사이에 있어 동선 손실이 거의 없고, 주말·저녁보다 평일 낮이 덜 붐빕니다. 영업시간은 출국 전 재확인하세요.<br><br>
         ⚠️ 로스터리 추가로 호텔 도착이 16:05경이 되어 16:30 공항 출발까지 여유가 적습니다. 시간이 밀리면 1000 Trees 관람을 줄이고 M50 예술구 산책은 생략하세요.<br><br>
-        동선: 안푸루 → 로스터리(난징시루) → 1000 Trees(북쪽) → 호텔(서쪽)로 되돌아가는 구간이 거의 없습니다. 4인이라 택시(DiDi) 1대로 이동을 권장합니다(지하철은 13호선 江宁路역 1번 출구에서 도보 5~10분). 퇴근 정체(17시~) 전에 호텔로 돌아옵니다. M50 갤러리는 월요일에 쉬는 곳이 많을 수 있고, 비가 오면 1000 Trees 대신 안푸루에 더 머무는 것을 대안으로 두세요.
+        동선: 안푸루(서쪽) → 란신(진셴루, 동쪽) → 로스터리(난징시루, 북쪽) → 1000 Trees(더 북쪽) → 호텔(서쪽)로 되돌아가는 구간이 거의 없습니다. 4인이라 택시(DiDi) 1대로 이동을 권장합니다(지하철은 13호선 江宁路역 1번 출구에서 도보 5~10분). 퇴근 정체(17시~) 전에 호텔로 돌아옵니다. M50 갤러리는 월요일에 쉬는 곳이 많을 수 있고, 비가 오면 1000 Trees 대신 로스터리에 더 머무는 것을 대안으로 두세요.
       </div>
     </div>
 
@@ -1208,10 +1246,24 @@
             </tr>
             <tr>
               <td class="name-cell">안푸루<br><span class="cn-copy" data-cn-name="安福路">安福路</span></td>
-              <td class="note-cell">브런치 카페 거리</td>
+              <td class="note-cell">카페·편집숍 산책 거리</td>
               <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=安福路&city=上海" target="_blank" rel="noopener">📍</a></td>
               <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=安福路,上海" target="_blank" rel="noopener">🌐</a></td>
               <td class="link-cell"><a class="maplink didi" href="#" data-didi="安福路">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">란신 (본방요리)<br><span class="cn-copy" data-cn-name="兰心餐厅(进贤路店)" data-cn-addr="上海市黄浦区进贤路130号">兰心餐厅(进贤路店)</span></td>
+              <td class="note-cell">점심 1안, 미슐랭 빕구르망 · 11:45 전 도착 권장</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=兰心餐厅(进贤路店)&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=兰心餐厅(进贤路店),上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="兰心餐厅(进贤路店)">🚕</a></td>
+            </tr>
+            <tr>
+              <td class="name-cell">광밍춘 (본방요리)<br><span class="cn-copy" data-cn-name="光明邨大酒家(淮海中路店)" data-cn-addr="上海市黄浦区淮海中路588号">光明邨大酒家(淮海中路店)</span></td>
+              <td class="note-cell">점심 2안, 1층 셴러우웨빙(鲜肉月饼) 포장 창구</td>
+              <td class="link-cell"><a class="maplink amap" href="https://uri.amap.com/search?keyword=光明邨大酒家(淮海中路店)&city=上海" target="_blank" rel="noopener">📍</a></td>
+              <td class="link-cell"><a class="maplink gmap" href="https://www.google.com/maps/search/?api=1&query=光明邨大酒家(淮海中路店),上海" target="_blank" rel="noopener">🌐</a></td>
+              <td class="link-cell"><a class="maplink didi" href="#" data-didi="光明邨大酒家(淮海中路店)">🚕</a></td>
             </tr>
             <tr>
               <td class="name-cell">스타벅스 리저브 로스터리<br><span class="cn-copy" data-cn-name="星巴克臻选上海烘焙工坊" data-cn-addr="上海市静安区南京西路789号兴业太古汇">星巴克臻选上海烘焙工坊</span></td>
@@ -1248,21 +1300,33 @@
 
     <div class="banner" style="margin-top:4px;">🍽️ Day5 추천 식당</div>
 
-    <div class="card" id="rest-anfulu">
-      <h2>☕ 안푸루 브런치 카페</h2>
-      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="安福路">안푸루 (安福路)</span></div>
-      <div class="kv"><div class="k">일정</div><div class="v">Day 5 · 10/19(월) 브런치</div></div>
-      <div class="kv"><div class="k">위치</div><div class="v">안푸루(安福路) 일대 — egg / Siso Coffee / Undefine 등</div></div>
-      <div class="kv"><div class="k">대표메뉴</div><div class="v">브런치, 커피, 갈레트/샌드위치</div></div>
-      <div class="kv"><div class="k">예약</div><div class="v"><span class="tag ok">불필요</span> 캐주얼 카페, 워크인 이용</div></div>
-      <div class="ref">📖 참고: <a href="https://linatraveler.com/41" target="_blank" rel="noopener">상하이 여행, 뻔한 명소 대신 채워줄 숨겨진 핫플 4곳 (방랑하는 리나)</a></div>
+    <div class="card" id="rest-lanxin">
+      <h2>🍖 란신 (兰心餐厅) · 진셴루점 <span class="tag warn">미슐랭</span></h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="兰心餐厅(进贤路店)">란신 (兰心餐厅 进贤路店)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 5 · 10/19(월) 점심 <span class="tag warn">1안</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">黄浦区 进贤路130号 (마오밍난루 인근, 안푸루에서 택시 10~15분 · 로스터리까지 택시 약 10분)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">홍샤오러우(红烧肉), 유바오샤(油爆虾), 장야(酱鸭), 탕추샤오황위(糖醋小黄鱼), 차오터우(草头) 볶음</div></div>
+      <div class="kv"><div class="k">예약</div><div class="v"><span class="tag ok">워크인</span> 오래된 주택을 고친 작은 노포라 식사 시간대엔 줄이 생김 → 12시 전 도착 권장 · ☎ 021-6253-3554</div></div>
+      <div class="kv"><div class="k">영업시간</div><div class="v">점심 11:00~14:00 (블로그 기준) <span class="tag todo">출국 전 확인</span></div></div>
+      <div class="kv"><div class="k">가격</div><div class="v">1인 약 80위안 내외</div></div>
+      <div class="ref">📖 참고: <a href="https://guide.michelin.com/sg/zh_CN/shanghai-municipality/shanghai/restaurant/lan-xin-jinxian-road" target="_blank" rel="noopener">미쉐린 가이드 · Lan Xin (Jinxian Road)</a></div>
+    </div>
+
+    <div class="card" id="rest-guangming">
+      <h2>🥮 광밍춘 (光明邨大酒家) · 화이하이중루점</h2>
+      <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="光明邨大酒家(淮海中路店)">광밍춘 (光明邨大酒家 淮海中路店)</span></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 5 · 10/19(월) 점심 <span class="tag muted">2안 · 란신 대기가 길 때</span></div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">黄浦区 淮海中路588号 (청두난루 인근, 란신과 로스터리 사이)</div></div>
+      <div class="kv"><div class="k">대표메뉴</div><div class="v">1956년 개업한 본방요리 노포 · 1층 포장 창구의 셴러우웨빙(鲜肉月饼, 고기 월병)이 명물</div></div>
+      <div class="kv"><div class="k">예약</div><div class="v"><span class="tag ok">불필요</span> 2층 식당 워크인 · 1층 월병 창구는 줄이 길 수 있음 · ☎ 021-5306-1200</div></div>
+      <div class="kv"><div class="k">영업시간</div><div class="v"><span class="tag todo">출국 전 확인</span></div></div>
     </div>
 
     <div class="card" id="rest-roastery">
       <h2>☕ 스타벅스 리저브 로스터리 상하이</h2>
       <div class="cn-row"><span class="cn-label">중국어</span><span class="cn-copy" data-cn="星巴克臻选上海烘焙工坊">스타벅스 리저브 로스터리 (星巴克臻选上海烘焙工坊)</span></div>
-      <div class="kv"><div class="k">일정</div><div class="v">Day 5 · 10/19(월) 13:15~14:15</div></div>
-      <div class="kv"><div class="k">위치</div><div class="v">静安区 南京西路789号 兴业太古汇 (난징시루, 안푸루↔1000 Trees 사이)</div></div>
+      <div class="kv"><div class="k">일정</div><div class="v">Day 5 · 10/19(월) 13:00~14:00 (점심 후 커피·디저트)</div></div>
+      <div class="kv"><div class="k">위치</div><div class="v">静安区 南京西路789号 兴业太古汇 (난징시루, 란신↔1000 Trees 사이)</div></div>
       <div class="kv"><div class="k">대표메뉴</div><div class="v">리저브 스페셜티 커피, Princi 베이커리 빵·디저트, 로스터리 한정 굿즈</div></div>
       <div class="kv"><div class="k">예약</div><div class="v"><span class="tag ok">불필요</span> 워크인 · 주말/저녁 혼잡, 평일 낮 권장</div></div>
       <div class="kv"><div class="k">영업시간</div><div class="v"><span class="tag todo">출국 전 확인</span></div></div>
@@ -1276,22 +1340,23 @@
     </div>
 
     <div class="card">
-      <h2>① 무비자 입국 요건 확인</h2>
-      <p class="app-desc">한국인은 관광 목적 최대 30일 무비자 입국 가능 (2026.12.31까지 연장 적용, 일반 전자여권 소지자 대상).</p>
+      <h2>① 서류 준비 및 확인</h2>
       <ol class="steps">
-        <li>여권 유효기간 6개월 이상 남아있는지 확인</li>
+        <li>비자 : 현재 한국인은 관광 목적 최대 30일 무비자 입국 가능</li>
+        <li>여권 : 유효기간 6개월 이상 남았는지 확인</li>
         <li>왕복 항공권(전자항공권) 및 호텔 예약확인서 PDF/캡처 저장 — 입국심사 시 요구될 수 있음</li>
-        <li>입국 목적은 "관광"으로만 소명, 취업·취재 등 다른 활동은 별도 비자 필요</li>
+        <li>입국 목적은 "관광"으로만 기재.</li>
         <li>숙박 등록(주숙등기)은 호텔 체크인 시 자동 처리됨</li>
       </ol>
-      <div class="ref">📖 참고: <a href="https://www.tripstore.kr/blog/%EC%A4%91%EA%B5%AD-%EC%97%AC%ED%96%89-%EB%B9%84%EC%9E%90-%EB%A9%B4%EC%A0%9C-%EC%A4%80%EB%B9%84%EB%AC%BC" target="_blank" rel="noopener">2026 중국 여행 비자 면제! 30일 무비자 입국 준비물 (트립스토어)</a></div>
     </div>
 
     <div class="card">
       <h2>② 온라인 입국카드 사전 작성</h2>
       <p class="app-desc">2025년 11월 20일부터 중국 입국카드가 온라인/모바일 사전 작성으로 전환되었습니다. 종이 신고서 없이 QR코드로 대체됩니다.</p>
       <ol class="steps">
-        <li>중국 정부서비스 플랫폼(국가이민관리국 온라인 신고 사이트)에 접속</li>
+        <li>중국 정부서비스 플랫폼(국가이민관리국 온라인 신고 사이트)에 접속<br>
+          <a class="food-link" href="https://s.nia.gov.cn/ArrivalCardFillingPC/" target="_blank" rel="noopener">https://s.nia.gov.cn/ArrivalCardFillingPC/</a><br>
+          <span style="color:var(--sub);font-size:0.92em;">공식 사이트는 무료입니다. 비용을 요구하는 유사 사이트에 주의하세요. '移民局12367' 앱, 위챗·알리페이 미니프로그램으로도 작성할 수 있습니다.</span></li>
         <li>영어 또는 중국어로 제공되므로, 크롬 브라우저의 자동번역 기능으로 한국어 확인 가능</li>
         <li>여권정보·항공편·숙소 정보(호텔명, 주소) 입력 — 가족 동반 시 대표자가 인원별로 각각 입력 가능</li>
         <li>제출 후 생성되는 QR코드를 화면 캡처 또는 저장 (입국 시 제시)</li>
@@ -1309,7 +1374,7 @@
         <li>내정보(Me) → Bank Cards → 카드번호·유효기간·CVC 입력 (VISA/Mastercard/JCB/AMEX 등 대부분 가능)</li>
         <li>본인 인증(여권 정보 등) 완료 후 등록 — "Tour Pass"에 카드를 연동하면 충전 없이 바로 결제 가능</li>
       </ol>
-      <div class="ref">📖 참고: <a href="https://brunch.co.kr/@3b552d00287c420/40" target="_blank" rel="noopener">알리페이 카드등록 방법·오류·안됨·트래블월렛·로그·여권 (브런치)</a></div>
+      <div class="ref">📖 참고: <a href="https://blog.naver.com/hu027/224263802129" target="_blank" rel="noopener">알리페이 카드등록 방법 및 사용법 (네이버 블로그)</a></div>
     </div>
 
     <div class="card">
@@ -1321,7 +1386,7 @@
         <li>나(Me) → 결제 및 서비스 → 지갑 → 은행카드 추가(Add a Bank Card)</li>
         <li>해외 발급 카드(Visa·Mastercard·JCB·Amex 등) 등록 가능. 실명인증 단계에서 안면인식이나 서류 제출을 요구할 수 있음</li>
       </ol>
-      <div class="ref">📖 참고: <a href="https://health.solbangwulwebsite.com/entry/%EC%9C%84%EC%B1%97%ED%8E%98%EC%9D%B4-%EA%B0%80%EC%9E%85%EB%B6%80%ED%84%B0-%EC%84%A4%EC%A0%95%EA%B9%8C%EC%A7%80-%E2%80%93-%ED%95%9C%EA%B5%AD%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B2%95-2025-%EC%B5%9C%EC%8B%A0-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8" target="_blank" rel="noopener">[2025 최신] 위챗페이 가입·설정·인증 완전정복</a></div>
+      <div class="ref">📖 참고: <a href="https://blog.naver.com/mjk2797/224180598352" target="_blank" rel="noopener">위챗페이 가입방법 사용법 충전 여권 카드등록 (네이버 블로그)</a></div>
     </div>
 
     <div class="card">
@@ -1333,25 +1398,26 @@
         <li>설정에서 언어를 한국어 또는 영어로 변경 (기본은 중국어)</li>
         <li>주요 목적지(호텔, 테니스장 등)를 미리 즐겨찾기에 저장해두면 현지에서 편리</li>
       </ol>
-      <div class="ref">📖 참고: <a href="https://pickitsmart.com/amap-global-signup-download/" target="_blank" rel="noopener">고덕지도 가입 방법, 다운로드부터 설치 및 오류까지 정리</a></div>
+      <div class="ref">📖 참고: <a href="https://blog.naver.com/cjm7919/224348695488" target="_blank" rel="noopener">고덕지도 사용법 완벽 가이드 꿀팁 총정리 (네이버 블로그)</a></div>
     </div>
 
     <div class="card">
-      <h2>⑥ (선택) 디디추싱(滴滴出行/DiDi) 사전 가입</h2>
-      <p class="app-desc">중국판 우버. 미리 가입해두면 현지에서 바로 택시 호출 가능.</p>
+      <h2>⑥ 디디추싱(滴滴出行/DiDi) — 알리페이 미니앱 준비</h2>
+      <p class="app-desc">중국판 우버(카카오T). 디디 앱을 따로 설치할 필요 없이 <b>알리페이 안의 디디 미니앱</b>으로 바로 택시를 호출할 수 있습니다.</p>
       <ol class="steps">
-        <li>App Store / Google Play에서 "DiDi" 검색 후 설치 (위챗/알리페이 내 미니앱으로도 이용 가능)</li>
-        <li>국제전화번호(+82, 한국 번호)로 인증 가입</li>
-        <li>설정(设置) → 언어를 영어로 변경</li>
-        <li>결제수단으로 알리페이/위챗페이 또는 해외카드 연결</li>
+        <li>알리페이 가입·여권 실명인증·해외카드 등록 완료 (③번 참고) — 이것만으로 디디 이용 준비 끝</li>
+        <li>알리페이 메인 화면 상단의 <b>DiDi Travel</b>(또는 검색창에 "DiDi"/"滴滴") 실행 → 미니앱 첫 실행 시 이용 동의</li>
+        <li>화면이 중국어로 나오면 오른쪽 하단 <b>Account → Language</b>에서 한국어 또는 영어로 변경</li>
+        <li>출국 전 한 번 실행해서 미니앱이 정상적으로 열리는지 확인해 두기</li>
       </ol>
-      <div class="ref">📖 참고: <a href="https://lulu.myheeya.com/775" target="_blank" rel="noopener">중국 택시 어플 디디 사용법 총정리 (라이프밸런스)</a></div>
+      <div class="ref">📖 참고: <a href="https://blog.naver.com/sohyun070/224294664894" target="_blank" rel="noopener">디디추싱 알리페이 미니앱 사용법부터 택시 종류 꿀팁 (네이버 블로그)</a></div>
     </div>
 
     <div class="card">
-      <h2>기타 준비물</h2>
+      <h2>기타 준비</h2>
       <ol class="steps">
-        <li>데이터 로밍 또는 중국용 유심/이심(eSIM) 준비 — 도착 직후 인터넷 연결 필요</li>
+        <li>데이터 로밍 신청</li>
+        <li>여행자 보험 가입</li>
         <li>보조배터리, 멀티어댑터(중국은 한국과 콘센트 모양 다를 수 있음)</li>
         <li>여권 사본(사진) 별도 보관</li>
       </ol>
@@ -1372,15 +1438,17 @@
     </div>
 
     <div class="card">
-      <h2>🚕 디디추싱(DiDi) 사용법</h2>
+      <h2>🚕 디디추싱(DiDi) 사용법 — 알리페이 미니앱</h2>
       <ol class="steps">
-        <li>앱 실행 → 출발지/도착지 입력 (고덕지도 주소를 복사해서 붙여넣으면 편리)</li>
-        <li>차량 등급 선택(이코노미 등) → 예상 요금 확인 후 호출</li>
-        <li>결제는 알리페이/위챗페이 또는 등록한 해외카드로 자동 결제</li>
-        <li>기사님이 위치 확인차 전화할 수 있어, 한국 번호(+82) 국제전화 수신이 가능하도록 로밍/데이터 설정 필요</li>
+        <li>알리페이 실행 → 메인 화면 상단 <b>DiDi Travel</b> 탭 (별도 디디 앱 불필요)</li>
+        <li>출발지·도착지를 영어 또는 중국어로 입력 — 이 일정표의 <b>🚕 디디</b> 버튼을 누르면 중국어 장소명이 복사되고 디디 미니앱이 열리므로, 목적지 칸에 붙여넣기만 하면 됨</li>
+        <li>차량 등급 선택 → 예상 요금 확인 후 호출. 이코노미(Economy)는 저렴하지만 담배 냄새 등 차량 상태가 복불복이라, 4인 동행이면 <b>Priority 이상</b> 권장</li>
+        <li>배정되면 화면에 표시되는 <b>번호판·차종·색상</b>을 확인하고 탑승</li>
+        <li>도착 후 알리페이에 연결된 해외카드로 자동 결제 — 현금·잔돈 주고받을 필요 없음</li>
+        <li>기사님이 위치 확인차 전화할 수 있음. 통화가 어려우면 미니앱 내 번역 기능이 있는 채팅으로 소통 가능</li>
         <li>상하이 기본요금은 약 16위안부터 시작</li>
       </ol>
-      <div class="ref">📖 참고: <a href="https://speakable.co.kr/blog/chinese-didi-taxi-guide" target="_blank" rel="noopener">디디추싱 사용법: 중국 택시 앱 호출부터 기사 전화 대응까지 (Speakable)</a></div>
+      <div class="ref">📖 참고: <a href="https://blog.naver.com/sohyun070/224294664894" target="_blank" rel="noopener">디디추싱 알리페이 미니앱 사용법부터 택시 종류 꿀팁 (네이버 블로그)</a></div>
     </div>
 
     <div class="card">
@@ -1423,6 +1491,7 @@
 </main>
 
 <button type="button" id="toTopBtn" class="to-top-btn" aria-label="맨 위로">↑</button>
+<div class="page-toast" id="pageToast" role="status"></div>
 
 <div class="cn-modal" id="cnModal" aria-hidden="true">
   <div class="cn-modal-actions">
@@ -1640,12 +1709,34 @@
     if(e.key === 'Escape'){ closeCnModal(); }
   });
 
+  var pageToast = document.getElementById('pageToast');
   function showCnToast(msg){
-    cnCopyToast.textContent = msg;
-    cnCopyToast.classList.add('show');
+    var t = cnModal.classList.contains('open') ? cnCopyToast : pageToast;
+    t.textContent = msg;
+    t.classList.add('show');
     clearTimeout(cnToastTimer);
-    cnToastTimer = setTimeout(function(){ cnCopyToast.classList.remove('show'); }, 1400);
+    cnToastTimer = setTimeout(function(){ t.classList.remove('show'); }, 1400);
   }
+
+  function copyToClipboard(text){
+    if(fallbackCopy(text)){ showCnToast('복사되었습니다'); return; }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        showCnToast('복사되었습니다');
+      }).catch(function(){
+        showCnToast('복사 실패 — 길게 눌러 복사하세요');
+      });
+    } else {
+      showCnToast('복사 실패 — 길게 눌러 복사하세요');
+    }
+  }
+
+  // 단순 복사 버튼 (확대 없이 복사만) — 복호화 후 삽입되는 예약 페이지에서도 동작하도록 위임
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.copy-btn') : null;
+    if(!btn) return;
+    copyToClipboard(btn.getAttribute('data-copy'));
+  });
 
   function fallbackCopy(text){
     var ta = document.createElement('textarea');
@@ -1770,7 +1861,7 @@
 </script>
 
 
-<script id="encPayload" type="application/json">{"v":1,"iter":600000,"salt":"ZR2jEbGH5xMnkhc2aeU0Zw==","iv":"xI7Iowr3SCTU4M19","ct":"R2rKjTC9e/6NSLvMfuVSJvrkrGVWqHs5ldDvj4QUev/Ks0FWGBxU9RyDQyOypiAFrhJo5wQgmZc13sARfn9LwdqijwxorQAUk12v3MUhzE7oDw/XQd4VyIqCcMTdRwxEhAY6T6IBeg/OzxVCl71WBGpk/sk9A/Gcaz/c+dLrd3GNP1nvbz7gqCRPtZguNmqy+wlmNDjBBiRRBKj4wrOH8uk90ANz1/MKPHsyk1XuBrZy/nveWD5GiFfPQ0m6w8OagWRdmCDTIedW2k277uxI1oDkDu7ErWHHMTcdW3dxZzVNECquNWX6GLkYQBV25bsqAHIPUPAEY55/hEplFbIwnJ4zj8Wm68VpPRf94ObauUxSIfIoy6bVKgWzlc82CiBcmzOkejTYOADlQsVsuTYoBQ97cSF6dYQUujaBIqqIj2fj9wx+u1LoWVKyTUG8kmd/XQ9O25W5D15BZ0bA+K+bAM3v/pzi9U6+tBgIllV2KzsNgRe+a6nM6CBRWTevg5djCw3eVUoHoOYKASorXjwMhkW40SK93M9DnYfGzVWWgDJpw75fjvutu3oeFiPWiH4gUzCnmPvm1BEJYQOIW3b3xrGFOrDFOirBpAjzo8JlDHup0//FPwCQTnVBaLR0CBC0auEQt4aR9eSeAf9sa2jdW9WDdYS4FH5lmGZxdLsyr7A+6Dt4wuY4mwSTytchTMN5RHdjV8IC3MhSid1INAEjK8GctUtZh+M42WwPLhLfSQaPI6lqGxr4c2POZMVgXRNdaQLsiGcVQ17ftD+r2+IRlLPXFQCaix+XCVJdvY6+Z1ElKrN8j/WvmxUJzS83+rs9QASUOfXcrDow+Hg8jk+Ha+ZMNGrJUf2VQBxCN4cWhjWvS6st0dDhA2DCkLuLd4ETr0kBUpw0rQdi0QG6QgYhg+te2Pwh55TqzZZj5I9KGPSe0+MaNcp1zNE3ah6el9lhiPGEA0uvBGv/psfSlgDwCkxXiLK5rSTPSs9hGeBOCc/t6SGxEEbGaxDyAjQ0drQhebSzQFKiHUK+Nw8//j2+/r4DR3vPK4jRVil3ZJlMJFZ0y/C94GoZKPwyD3Md1IEoecaDAgty+pjFjauVvMPHFJDc1e/ChMW5jabuyOgAfrNTyjxcWzisoPDyA7kc50Y40Xf3sUGYf0jeRfkJovGsRtUqbmD9hv6MgkEWzDJ2IPnXfjKiXYTLo+u/PtgMiMCNEf3KSHJSGXiQymjr84iNGUgbTDBivCEPENUVO8Aa7ztlUJGiF2HfdMYIesRqjp+UDvrbcF4QJrdWh4XDTRiMZR0q8Kn0nwUVvk93O6Lh1oKTIt8cyp+l/KUonQSw0OToc8OqFcdW4ThiJvEQn0SmQh+AToIGnLNxnE50MgTAMN1oHvs5siLLN1GancmI84uPS+3k9wWwwpV0COyBo1nB7wiUA/1C6YD4aGdbyr9BwoUucgX1kUye3MP5mnJteUBseDpWOpDRlGaQChDPqOkEONxOdAfzOEt0QE9Q1zKxzCcpsc6/oiZzdoxN0Rr29MORz3UM4F8roZO+yCczXCjWJDSNaqhuoaPypK/x7wxhRPQdPIcs2AuTL6zwHz+Q1wqQnniFeO1MG8RKw/5nqOALKbVivfpq5VDqWV15p7aEfLPgpdm6uauk/QTomVTmcmGxTstlWmFU7mGZpk4VXLgRpXnS2HV2r3NtAkq8VnbKxV+Y/xOJC5wXqFoOQn1KrCP3ohwnixQ1xafkhSgA5likQjqTs2ym+eiR0q2zZdg/fuAEt2LUhtGY5rQIQVDvMwds5EYiBKb8wiJb1VjUo18Au2e2QS3/uzQeXsfml5JEIqW1fG/mRwV6DmkLYhGMovUpzED1uw8EiYQ29b4N6RNktqXuzhd/jTCBMTSCoQYZcsjFeHfd3gdDXxqrynZnMeKUxmmAgq57QQEi5oIPCuVDfk+v+TjRjD6CRXwZMPwlyY2Xt/Eld+IntLETQEdH2LJLXi5szNkL5Xe6PStcfdMQZfZLi1+G50BVZjxzTOREJYKyOzwT+jH1gz29gnO/UG43uH+xKiGNy1SJPjYhkAZ+LEpO3kbO5Qv2YPPPDRdM6l41I4zrjyjgw1R7zK3yAnx8v7UpfPlOnNywEIJ21EvfbGXxOhM2bGNCuRvcczMbsniwLD9rcTXNSe+5o0T1/moa9XzN0N29G38ZsZCB8x9weZs2uMKjvoJQ4dUHRxSlv4BTNtRnAi9qTOfzaEb4x86gJyOx91BtefRG4xKLKv5q1XoS9/pdsAK8Zo2UEPMnVsD4UWQYh58Dv+UzPKNIrl2DDPG9PUi67poud6rscAzI5msWOrL7iHemzQJA/qO20HZggctWKn9wCG2/X8oMawzFn/MOQfIlQNvz7rqYMWgHK9x8vqChvwQ4G53P16UUzGe7gv+grvO11nsGtLm783gFJ1yLTz6/rlkDFlImG29j5CacdmfdTf71YSBFJD+FkUDoV/2FLJ1sPJvr0x7UzbfHKmYpr9PxXVsTze2d9D8Q8nq6eE2pMTzZbBZ+ATK5lKzLFu09Q1tDLadknTDXzbQcD1WG26Vid5Ce/MDJLh3nst60SpgHTg7d15EJzroTK5We4GATm4PeZMakMM705HaxDOUAYJ150Of8mvNIjkgJmgS6XtvegfzvPLIFRIfjuhpbDrst3P5JDjYysTV8lauuX4h5yF1EjaQTJKhAxYJIMI5+o7jmQddZTHKFpgXmWbEVaChiKXtD4mhs/fc7e9mjFkhAgKW+9WmvS9S16BYv"}</script>
+<script id="encPayload" type="application/json">{"v":1,"iter":600000,"salt":"ZR2jEbGH5xMnkhc2aeU0Zw==","iv":"jSGsPajpb7ULCz/I","ct":"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"}</script>
 <script>
 (function(){
   var P = JSON.parse(document.getElementById('encPayload').textContent);
